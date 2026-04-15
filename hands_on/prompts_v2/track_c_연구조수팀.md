@@ -289,6 +289,46 @@ claude --model gemma4
 
 ---
 
+## 팁: `/loop`으로 선행연구 반복 탐색
+
+선행연구가 부족하거나 품질이 낮을 때, Claude Code에서 `/loop`을 사용하면 만족할 때까지 반복합니다:
+
+```
+/loop 선행연구를 5건 더 찾아서 output/02_literature_review.md에 추가해줘.
+기존 논문과 중복되지 않게, 다른 키워드로 검색해.
+추가한 논문마다 출처 URL을 포함하고, 확인 안 되면 "확인 필요" 표시.
+```
+
+이렇게 하면 Claude Code가 자동으로 반복 실행하며 선행연구를 누적합니다. 충분하다고 판단되면 멈춥니다. 이것도 harness engineering — 사람이 반복하는 게 아니라 시스템이 반복.
+
+---
+
+## 팁: Claude Code 안에서 Codex/Gemini 호출
+
+터미널을 나가지 않고 Claude Code 안에서 다른 모델을 호출할 수 있습니다:
+
+**Codex (OpenAI 계열):**
+```
+bash로 아래 명령을 실행해줘:
+codex exec "$(cat output/03_research_questions.md)
+
+위 연구 설계의 논리적 문제를 찾아줘. 검증 실패는 표시해."
+결과를 output/04_verification_codex.md에 저장해줘.
+```
+
+**Gemini (Google 계열):**
+```
+bash로 아래 명령을 실행해줘:
+echo "$(cat output/03_research_questions.md)
+
+위 연구 설계의 논리적 문제를 찾아줘. 검증 실패는 표시해." | gemini
+결과를 output/04_verification_gemini.md에 저장해줘.
+```
+
+**핵심: 터미널 하나, 세션 하나에서 4개 계열 교차검증이 가능합니다.**
+
+---
+
 ## 함정 피하기
 
 - **검증 없이 결과를 그냥 쓰지 마세요.** AI가 빠르게 내놓으니 그냥 받고 싶지만, 그게 "검증부채(Verification Debt)"입니다.

@@ -179,4 +179,19 @@ CLAUDE.md가 "이 프로젝트가 뭔가"라면, AGENTS.md는 "어떻게 일할 
 
 ---
 
+---
+
+## 올해 달라진 것: Prompt → Context → Harness
+
+| 작년 (Prompt) | 올해 (Harness) |
+|---|---|
+| 매번 배경을 복붙 | CLAUDE.md가 자동 로드 |
+| 도구 바꾸면 처음부터 | 같은 문서를 Claude/ChatGPT/Gemini에 공유 |
+| 결과가 산발적 | 출력 규칙·금기가 일관성 보장 |
+| 내가 다 검증 | AGENTS.md에 검증 규칙까지 포함 |
+
+**맥락 문서 = harness의 가장 기본 단위.** Track C에서 이 위에 교차검증까지 쌓습니다.
+
+---
+
 *템플릿 전체 버전: `hands_on/templates/CLAUDE.md.example`*

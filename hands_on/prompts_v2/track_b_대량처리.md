@@ -193,4 +193,34 @@ output/
 
 ---
 
+---
+
+## 올해 달라진 것: 왜 "harness"인가
+
+| 작년 (Tool Hopping) | 올해 (Harness) |
+|---|---|
+| PDF마다 새 채팅에서 복붙 | Claude Code가 폴더째 배치 처리 |
+| 분류 기준을 AI가 임의로 | 내가 축을 설계, AI가 실행 |
+| 결과가 채팅에만 존재 | 파일로 저장 → 재사용 가능 |
+| 검증? 눈으로 | 교차검증 가능 (Track C 참조) |
+
+**파이프라인이 파일로 남는다 = 다음에 PDF 10개가 더 와도 같은 체계로 이어간다.**
+이게 Harness Engineering의 실제 형태.
+
+---
+
+## 팁: `/loop`으로 대량 처리 자동화
+
+PDF가 많을 때 Claude Code에서:
+
+```
+/loop sample_data/ 폴더의 PDF를 하나씩 읽고 
+output/summaries/에 동일 포맷으로 저장해줘.
+이미 처리된 파일은 건너뛰어.
+```
+
+사람이 10번 반복할 걸 시스템이 자동으로.
+
+---
+
 *본 실습의 전체 스크립트 / 자동화 버전은 `demo/qualitative_research/` 참조.*
