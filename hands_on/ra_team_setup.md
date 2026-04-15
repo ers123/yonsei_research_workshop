@@ -120,10 +120,13 @@ claude --version
 
 ```bash
 # Ollama가 실행 중인 상태에서:
-ANTHROPIC_BASE_URL=http://localhost:11434/v1 \
-ANTHROPIC_MODEL=qwen3.5:9b \
-claude
+export ANTHROPIC_AUTH_TOKEN=ollama
+export ANTHROPIC_BASE_URL=http://localhost:11434
+claude --model qwen3.5:9b
 ```
+
+첫 실행 시 로그인 프롬프트가 나오면 **"Anthropic Console account (API usage billing)"** 선택.
+크레딧 불필요 — API 흐름을 활성화할 뿐.
 
 이렇게 하면 Claude Code의 **모든 기능** — CLAUDE.md 자동 로드, subagent, MCP 도구, 파일 작업 — 이 **로컬 모델로** 동작합니다. Anthropic 과금 없이.
 
@@ -131,10 +134,23 @@ claude
 
 ```bash
 # ~/.zshrc 또는 ~/.bashrc에 추가
-alias claude-local='ANTHROPIC_BASE_URL=http://localhost:11434/v1 ANTHROPIC_MODEL=qwen3.5:9b claude'
+alias claude-local='ANTHROPIC_AUTH_TOKEN=ollama ANTHROPIC_BASE_URL=http://localhost:11434 claude --model qwen3.5:9b'
 ```
 
 이후 `claude-local` 명령어로 바로 시작.
+
+#### Windows (PowerShell)
+
+```powershell
+$env:ANTHROPIC_AUTH_TOKEN="ollama"
+$env:ANTHROPIC_BASE_URL="http://localhost:11434"
+claude --model qwen3.5:9b
+```
+
+#### 참고 자료
+- [Running Claude Code for Free: Two Methods](https://aiautomationsociety.com) — Nate Herk, AIS+
+- https://www.youtube.com/watch?v=eAleab2cL3I
+- https://www.youtube.com/watch?v=mN2VUw5Fb3E
 
 ---
 
