@@ -18,21 +18,37 @@
 ### 세팅 방법
 
 ```bash
-# 1. 새 터미널을 연다 (이 세션과 별도)
+# 1. 새 터미널을 연다 (기존 Claude Code 세션과 별도)
 
-# 2. 프로젝트 폴더로 이동
+# 2. Ollama가 실행 중인지 확인
+ollama list
+# → 모델 목록이 나오면 OK
+# → "connection refused" 나오면: ollama serve &
+
+# 3. 환경변수 설정 (이 터미널에서만 적용, 기존 설정에 영향 없음)
+export ANTHROPIC_AUTH_TOKEN=ollama
+export ANTHROPIC_BASE_URL=http://localhost:11434
+
+# 4. 프로젝트 폴더로 이동
 cd ~/Downloads/work/Yonsei/0424_research_workshop/hands_on/scenario_comparison
 
-# 3. Ollama가 실행 중인지 확인
-ollama ps
-# 아무것도 안 뜨면: ollama serve &
+# 5. Claude Code를 로컬 모델로 시작
+claude --model qwen3.5:9b
 
-# 4. Claude Code를 로컬 모델로 시작
-ANTHROPIC_BASE_URL=http://localhost:11434/v1 claude
-
-# 5. Claude Code 안에서 모델 선택
-/model qwen3.5:9b
+# 첫 실행 시 로그인 프롬프트가 나오면:
+# → "Anthropic Console account (API usage billing)" 선택
+# → 크레딧 불필요. API 흐름 활성화일 뿐.
 ```
+
+**Windows (PowerShell)의 경우:**
+```powershell
+$env:ANTHROPIC_AUTH_TOKEN="ollama"
+$env:ANTHROPIC_BASE_URL="http://localhost:11434"
+cd ~/Downloads/work/Yonsei/0424_research_workshop/hands_on/scenario_comparison
+claude --model qwen3.5:9b
+```
+
+**참고:** `export`는 현재 터미널 세션에만 적용됩니다. 다른 터미널의 Claude Code(Anthropic API)에 영향 없음.
 
 ### 진행 순서
 
@@ -110,12 +126,13 @@ scenario_a/
 ### 세팅 방법
 
 ```bash
-# 현재 세션(Claude Code Opus/Sonnet)에서 바로 진행
-# 또는 새 터미널에서:
+# 환경변수 설정 없이 (기본 Anthropic API 사용)
 cd ~/Downloads/work/Yonsei/0424_research_workshop/hands_on/scenario_comparison
 claude
 # /model sonnet 또는 기본 모델 사용
 ```
+
+**참고:** Scenario A 터미널에서 `export`한 환경변수는 이 터미널에 영향 없음. 별도 터미널이면 기본 Anthropic API로 동작.
 
 ### 진행 순서
 
