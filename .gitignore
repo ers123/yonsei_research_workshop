@@ -1,0 +1,26 @@
+# 워크숍 작업 중 생성된 내부 자료 (참가자 공개 대상 아님)
+_working/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (slides/src 빌드 시)
+slides/src/node_modules/
+slides/src/package-lock.json
+
+# Python (만약 추가 스크립트 작성 시)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# 임시 파일
+*.tmp
+*.bak
+qa_slides/
