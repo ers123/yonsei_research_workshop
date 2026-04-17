@@ -5,7 +5,7 @@
 본 repository는 2026년 4월 연세대학교 생활과학대학에서 진행한 워크숍의 자료 모음입니다.
 참가자가 워크숍 이후에도 혼자서 따라 해볼 수 있도록 구성되었습니다.
 
-강사: **이요한** (HarmonyOn) · amazone1@daum.net
+강사: **이요한** (HarmonyOn) · yohan.harmony@gmail.com
 
 ---
 
