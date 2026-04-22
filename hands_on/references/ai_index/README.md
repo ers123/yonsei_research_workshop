@@ -8,6 +8,7 @@ Track B (대량 자료 처리)의 주 실습 자료입니다.
 |------|------|------|
 | `ai_index_report_2026.pdf` | 약 37 MB | 원본 PDF (Stanford HAI, 2026). Part 1 Naive 접근 + Part 2 직접 추출 시도 |
 | `ai_index_extracted_backup.md` | 약 13 KB | 미리 추출된 백업. Part 2에서 추출이 시간 초과되거나 실패했을 때 사용 |
+| `naive_vs_harness_examples.md` | — | Part 3 비교용: 같은 질문에 대한 Naive vs Harness 응답 예시 |
 
 ## 원본 출처
 
@@ -17,7 +18,7 @@ Track B (대량 자료 처리)의 주 실습 자료입니다.
 
 ## 실습 흐름
 
-상세는 `hands_on/prompts_v2/track_b_대량처리.md` 참조.
+상세는 `hands_on/prompts/track_b_대량처리.md` 참조.
 
 요약:
 1. **Part 1** — 원본 PDF를 챗봇에 그대로 업로드 → 난이도별 질문 3개 (쉬움/중간/어려움)

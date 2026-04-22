@@ -4,7 +4,7 @@
 **목표**: 대용량 PDF를 "중간 산출물(AI-friendly markdown)"로 변환해 **재사용 가능한 자산**으로 만드는 법을 체험한다. Naive 접근이 어디까지 잘 되고, 어디서 무너지는지를 직접 본다.
 
 **실습 자료**: Stanford HAI의 *AI Index Report 2026* (423페이지, 약 37MB 공개 보고서)
-→ `hands_on/sample_data/ai_index/ai_index_report_2026.pdf`
+→ `hands_on/references/ai_index/ai_index_report_2026.pdf`
 
 ---
 
@@ -34,7 +34,7 @@
 
 ## 준비물
 
-- **AI Index 2026 PDF** (`hands_on/sample_data/ai_index/ai_index_report_2026.pdf`, 37MB)
+- **AI Index 2026 PDF** (`hands_on/references/ai_index/ai_index_report_2026.pdf`, 37MB)
 - **Claude 또는 ChatGPT** (무료 OK — 업로드 제한은 오늘의 첫 교훈이 될 수도 있음)
 - **(선택) Claude Code** — Part 2에서 직접 추출을 시도하려면 필요. 설치는 `hands_on/SETUP.md` 참조. 시간이 없으면 미리 추출된 백업을 사용해도 OK.
 - **텍스트 편집기** — 결과 마크다운을 열어볼 용도
@@ -68,7 +68,7 @@
 > **이게 첫 번째 교훈**입니다: "대용량 PDF는 챗봇의 가장 만만한 입구가 아니다."
 > 거부되면 Part 2로 바로 넘어가세요. 그 자체가 harness가 필요한 이유입니다.
 >
-> **업로드는 실패했지만 Part 3 비교는 포기하지 마세요**: Part 3에서 "Naive 응답" 자리에는 `hands_on/sample_data/ai_index/naive_vs_harness_examples.md` 의 **각 질문별 Naive 응답**을 본인 응답처럼 간주하고 대조해 보세요. Naive가 어디서 무너지는지 패턴을 파악하는 게 이 실습의 핵심이지, 본인이 직접 그 실패를 재현해야만 하는 건 아닙니다.
+> **업로드는 실패했지만 Part 3 비교는 포기하지 마세요**: Part 3에서 "Naive 응답" 자리에는 `hands_on/references/ai_index/naive_vs_harness_examples.md` 의 **각 질문별 Naive 응답**을 본인 응답처럼 간주하고 대조해 보세요. Naive가 어디서 무너지는지 패턴을 파악하는 게 이 실습의 핵심이지, 본인이 직접 그 실패를 재현해야만 하는 건 아닙니다.
 
 ### 1-2. 난이도별 질문 3개 던지기
 
@@ -172,7 +172,7 @@ claude
 
 Claude Code 안에서:
 ```
-hands_on/sample_data/ai_index/ai_index_report_2026.pdf 파일을 읽고
+hands_on/references/ai_index/ai_index_report_2026.pdf 파일을 읽고
 AI-friendly 마크다운으로 추출해줘.
 
 규칙:
@@ -205,7 +205,7 @@ Part 1에서 업로드 성공했다면 그 세션에서 이어서:
 
 #### 옵션 3: 강사 제공 백업 사용 (시간 없을 때)
 
-`hands_on/sample_data/ai_index/ai_index_extracted_backup.md` — 미리 추출해둔 파일.
+`hands_on/references/ai_index/ai_index_extracted_backup.md` — 미리 추출해둔 파일.
 복사해서 본인 작업 폴더에 `ai_index_extracted.md`로 두세요.
 
 > **선택 기준**: Claude Code가 깔려 있고 여유 있으면 옵션 1. 업로드가 성공한 상태면 옵션 2. 둘 다 아니면 옵션 3.
@@ -265,7 +265,7 @@ C) Figure 1.1.3 세계지도에서 '181-630' 구간 국가 리스트
 
 **교훈**: 진짜 차이는 "정답률"이 아니라 **"모르는 걸 모른다고 말하는 능력"**. 이게 검증가능성의 기초.
 
-> **📎 본인 결과가 "이게 맞나?" 싶다면**: `hands_on/sample_data/ai_index/naive_vs_harness_examples.md` 에 **각 질문의 실제 Naive/Harness 응답 예시**를 side-by-side로 정리해뒀습니다. 본인이 받은 답과 대조해 보세요. 모델·세션에 따라 응답은 다를 수 있지만, **패턴**(Naive가 어디서 환각/회피하고, Harness가 어디서 명확해지는지)은 반복 관찰됩니다.
+> **📎 본인 결과가 "이게 맞나?" 싶다면**: `hands_on/references/ai_index/naive_vs_harness_examples.md` 에 **각 질문의 실제 Naive/Harness 응답 예시**를 side-by-side로 정리해뒀습니다. 본인이 받은 답과 대조해 보세요. 모델·세션에 따라 응답은 다를 수 있지만, **패턴**(Naive가 어디서 환각/회피하고, Harness가 어디서 명확해지는지)은 반복 관찰됩니다.
 
 ---
 
@@ -384,28 +384,27 @@ output/extracted/에 같은 포맷의 마크다운으로 저장해줘.
 
 ---
 
-## (심화 3) 분류·비교 — sample_data/ 10건 활용
+## (심화 3) 분류·비교 — 본인 자료로 횡단 분석
 
-Track B의 기본은 "대용량 1건"이지만, "여러 건 횡단 분류"도 자주 필요합니다.
-`hands_on/sample_data/sample_01~10.txt` (가상의 연구논문 10건)로 연습 가능:
+Track B의 기본은 "대용량 1건"이지만, "여러 건 횡단 분류"도 자주 필요합니다. 본인이 모은 논문 PDF 10-20편을 `data/` 같은 폴더에 두고 아래 패턴 활용:
 
 ```
-sample_data/ 폴더의 10개 파일을 읽고 다음 축으로 분류해줘:
-- 축 A: 주제 영역 (식품영양 / 노화 / 주거 / 섬유 / 디자인)
+data/ 폴더의 파일을 모두 읽고 다음 축으로 분류해줘:
+- 축 A: 주제 영역
 - 축 B: 방법론 (양적 / 질적 / 혼합 / 리뷰)
-- 축 C: 대상 (아동 / 청소년 / 성인 / 노인 / 전체)
+- 축 C: 대상 집단
 
 표로 정리하고, 빈 칸 조합(=연구 갭) 상위 3개를 알려줘.
 ```
 
-이 흐름의 상세는 **자습용 예제**로 `hands_on/sample_data/README.md` 참조.
+"Naive=같은 요청 챗봇에 던지기" vs "Harness=각 파일을 먼저 구조화된 중간 산출물로 추출한 뒤 분류 요청" 의 차이가 여기서도 동일하게 드러납니다.
 
 ---
 
 ## 참고
 
 - *질적연구 파이프라인 사례*: `demo/qualitative_research/`  —  같은 "추출→구조화→분석" 개념을 인터뷰 전사에 적용
-- *4모델 교차검증*: `hands_on/scenario_comparison/scenario_b/` — 추출한 자료를 여러 모델로 검증하는 단계 (Track C의 영역)
+- *4모델 교차검증*: `hands_on/scenario_comparison/` — 추출한 자료를 여러 모델로 검증하는 단계 (Track C의 영역)
 - *AI Index 원본*: https://hai.stanford.edu/ai-index/ — Stanford HAI 공식
 
 ---

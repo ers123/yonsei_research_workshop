@@ -99,7 +99,7 @@ AI가 갑자기 엉뚱한 소리를 하면 → 컨텍스트가 가득 찼다는 
 ### 예시 A: PDF 논문 10개 일괄 요약
 
 ```
-sample_data/ 폴더에 PDF 10개가 있어.
+data/ 폴더에 PDF 10개가 있어.
 각 PDF를 읽고 아래 형식으로 output/summaries/파일명_summary.md 저장해줘:
 
 ## 메타
@@ -173,5 +173,4 @@ my_research/
 
 ---
 
-*전체 명령어 레퍼런스가 필요하면 → `claude_code_사용가이드.md` 참조*  
-*세션 안에서 `/help`를 치면 전체 명령어를 볼 수 있습니다*
+*세션 안에서 `/help`를 치면 전체 명령어를 볼 수 있습니다. 공식 문서: https://docs.claude.com/en/docs/claude-code*

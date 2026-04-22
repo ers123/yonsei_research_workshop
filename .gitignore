@@ -41,3 +41,6 @@ slides/
 
 # Streamlit "나만의 연구팀" 앱 — 강사 라이브 데모 전용, 소스 비공개
 demo/streamlit_research_team/
+
+# 워크숍 준비 개발 로그 (공개 repo 제외, 로컬만)
+PROGRESS.md

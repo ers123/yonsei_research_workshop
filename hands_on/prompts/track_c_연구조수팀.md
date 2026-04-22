@@ -35,7 +35,7 @@
 - [ ] Streamlit 앱 실행 상태 (강사 로컬 사본): `cd demo/streamlit_research_team && streamlit run app.py`
   → 브라우저에 http://localhost:8501 띄워둠
 - [ ] Ollama `gemma4` 모델 **미리 로드** (`ollama run gemma4 "hi"` 한 번 실행 → 메모리 점유)
-- [ ] `hands_on/scenario_comparison/scenario_b/05_cross_validation_4models.md` 탭에서 열어둠
+- [ ] `hands_on/scenario_comparison/05_cross_validation_4models.md` 탭에서 열어둠
 - [ ] 법무팀 앱 스크린샷 (비교용 1컷) 준비 — 슬라이드에 이미 포함되어 있으면 그걸로 OK
 
 ---
@@ -100,7 +100,7 @@ claude
 
 ### 🎬 Scene 4 — 4모델 교차검증 (2-3분)
 
-`scenario_b/05_cross_validation_4models.md` 파일 또는 슬라이드 23으로 전환.
+`hands_on/scenario_comparison/05_cross_validation_4models.md` 파일 또는 슬라이드 23으로 전환.
 
 > "에이전트 하나만으로는 부족할 수 있어요. 그래서 같은 연구 설계를 **4개 계열 모델**(DeepSeek R1, Gemma 4, Codex, Gemini)에 각각 공격시켜봤어요."
 
@@ -127,7 +127,7 @@ claude
 > - 여러분이 혼자 차분히 할 때 성공률이 훨씬 높다
 > - 그래서 대신 **이 시연**으로 전체 구조를 보여드린 거예요
 
-> 리포지토리 `hands_on/prompts_v2/track_c_연구조수팀.md` 의 **Part B — 홈스터디 가이드**를 따라가면 오늘 본 시연과 동일한 3-agent 구조를 Claude Code + Ollama 로 직접 만들 수 있습니다. Streamlit 앱은 강사 시연 전용으로 repo 에 포함되지 않지만, 개념은 프롬프트만 바꿔서 여러분 분야로 재설계 가능합니다."
+> 리포지토리 `hands_on/prompts/track_c_연구조수팀.md` 의 **Part B — 홈스터디 가이드**를 따라가면 오늘 본 시연과 동일한 3-agent 구조를 Claude Code + Ollama 로 직접 만들 수 있습니다. Streamlit 앱은 강사 시연 전용으로 repo 에 포함되지 않지만, 개념은 프롬프트만 바꿔서 여러분 분야로 재설계 가능합니다."
 
 [슬라이드로 돌아가며 다음 섹션(실습 안내)으로 전환]
 
@@ -399,11 +399,11 @@ Tier별 상세: `hands_on/ra_team_tiers.md`
 
 ## 참고 자료
 
-- **🎯 완주 예시 (이 문서와 나란히 보기)**: `hands_on/prompts_v2/track_c_홈스터디_완주예시.md`
+- **🎯 완주 예시 (이 문서와 나란히 보기)**: `hands_on/prompts/track_c_홈스터디_완주예시.md`
 - 로컬 모델 세팅 상세: `hands_on/ra_team_setup.md`
 - Tier별 구성: `hands_on/ra_team_tiers.md`
 - 강사 환경 레퍼런스 (M4 32GB): `hands_on/reference_setup_m4_32gb.md`
-- 4모델 교차검증 실제 결과: `hands_on/scenario_comparison/scenario_b/`
+- 4모델 교차검증 실제 결과: `hands_on/scenario_comparison/`
 - 로컬 AI 무료 가이드: `appendix/01_로컬AI_무료_활용_가이드.md`
 - 강사 라이브 데모의 Streamlit 앱은 repo 비공개. 같은 3-agent 구조를 Claude Code + Ollama 로 재현하는 것이 이 홈스터디 가이드의 전부.
 

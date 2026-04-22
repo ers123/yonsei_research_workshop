@@ -13,13 +13,13 @@
 
 ### 1. 워크숍에 참석하셨다면 — 복기용
 - 슬라이드는 Google Drive 링크(강사에게 요청)로 다시 보기
-- `hands_on/prompts_v2/`에서 본인 트랙 프롬프트 복붙해서 재실행
+- `hands_on/prompts/`에서 본인 트랙 프롬프트 복붙해서 재실행
 - `appendix/`에서 심화 주제 (로컬 AI, LLM Wiki) 읽기
 
 ### 2. 워크숍을 놓치셨다면 — 자습용
 1. Google Drive 의 슬라이드 먼저 훑기 (강사 이메일로 링크 요청)
 2. `hands_on/SETUP.md`로 환경 준비
-3. `hands_on/prompts_v2/`의 트랙 A → B → C 순서대로 실행
+3. `hands_on/prompts/`의 트랙 A → B → C 순서대로 실행
 4. `demo/qualitative_research/`에서 실제 프로젝트 사례 감 잡기
 
 ### 3. 이것을 본인 강의에서 재활용하고 싶다면
@@ -34,30 +34,25 @@
 ├── (슬라이드는 Google Drive 로 별도 공유 — 강사에게 링크 요청)
 │
 ├── appendix/                         — 별첨 자료
-│   ├── 01_로컬AI_무료_활용_가이드.md  — Ollama, 모델 비교(Gemma 4 / Qwen3 / Phi-4), 비용
+│   ├── 01_로컬AI_무료_활용_가이드.md  — Ollama, 모델 비교, 비용
 │   ├── 02_LLM_Wiki_지식베이스_가이드.md — 개인 지식 축적 구조
-│   ├── 03_NTIS_차별성검토_가이드.md   — 국가 R&D 과제 검색 + AI 분석 흐름
-│   └── references.md                 — 워크숍 인용 자료 전체 (논문·블로그·보고서)
+│   └── 04_Uncensored_로컬모델_연구활용_가이드.md — 민감 코퍼스·합성 데이터 심화 가이드
 │
 ├── hands_on/                         — 실습 자료
 │   ├── SETUP.md                      — 사전 환경 설치 (Mac/Windows/Linux)
-│   ├── prompts_v2/                   — 트랙 실습 프롬프트 + 예시
+│   ├── prompts/                      — 트랙 실습 프롬프트 + 예시
 │   │   ├── track_a_맥락문서.md
 │   │   ├── track_b_대량처리.md
 │   │   ├── track_c_연구조수팀.md      — 강사 데모 스크립트 + 홈스터디
 │   │   └── track_c_홈스터디_완주예시.md — 외부 도움 없이 완주 가능한 단계별
-│   ├── sample_data/                  — Track B 실습 자료
-│   │   ├── ai_index/                 — AI Index 2026 PDF (37MB)
-│   │   │   ├── ai_index_report_2026.pdf
-│   │   │   ├── ai_index_extracted_backup.md     — 미리 추출된 백업
-│   │   │   └── naive_vs_harness_examples.md     — 실제 비교 응답 예시
-│   │   └── sample_01~10.txt          — 심화 자습용 (가상 논문 10건)
-│   ├── templates/                    — CLAUDE.md, AGENTS.md 템플릿
+│   ├── templates/                    — CLAUDE.md, AGENTS.md 템플릿 + 비교 예시
 │   │   ├── CLAUDE.md.example
 │   │   ├── CLAUDE.md.filled_example  — 완성된 맥락 문서 사례
 │   │   ├── AGENTS.md.example
 │   │   └── A_vs_B_response_examples.md — Track A 비교 응답 예시
-│   ├── references/                   — Claude Code 퀵가이드 · 사용가이드 (자습용)
+│   ├── references/                   — Claude Code 퀵가이드 + AI Index 2026 원본/추출백업/비교예시
+│   │   ├── claude_code_퀵가이드.md
+│   │   └── ai_index/                 — Track B 실습 자료 (PDF 37MB + 백업 + Naive vs Harness 예시)
 │   ├── scenario_comparison/          — 4모델 교차검증 실제 결과 (Scenario B)
 │   ├── ra_team_setup.md              — RA 팀 상세 구성 가이드
 │   └── ra_team_tiers.md              — Free/Standard/Full 비용 비교
@@ -66,8 +61,8 @@
     └── qualitative_research/         — 질적연구 데모 (PDF→코드북→분석)
 ```
 
-> **슬라이드**: 공개 repo 에는 포함하지 않고 Google Drive 로 별도 공유. 링크는 yohan.harmony@gmail.com 로 요청.
-> **Streamlit "나만의 연구팀" 앱**: 강사 라이브 데모 전용 소스로 공개 repo 에서 제외. 같은 개념을 **Claude Code + Ollama** 터미널 기반으로 재현하는 가이드는 `hands_on/ra_team_setup.md` 와 `hands_on/prompts_v2/track_c_연구조수팀.md` 에 있음.
+> **슬라이드(.pptx)**: 공개 repo 에는 포함하지 않고 Google Drive 로 별도 공유. 링크는 yohan.harmony@gmail.com 로 요청.
+> **Streamlit "나만의 연구팀" 앱**: 강사 라이브 데모 전용 소스로 공개 repo 에서 제외. 같은 개념을 **Claude Code + Ollama** 터미널 기반으로 재현하는 가이드는 `hands_on/ra_team_setup.md` 와 `hands_on/prompts/track_c_연구조수팀.md` 에 있음.
 
 ---
 
@@ -97,7 +92,7 @@ Part 3 실습 (45-50분)
 
 **Part 2 라이브 데모** (강사 시연 12-15분, "나만의 연구팀" 앱 시연 중심) + **홈스터디 가이드** (리포에서 단계별 재현 가능).
 
-로컬 모델 설치는 노트북 편차가 커서 45분 안에 전원 성공 보장이 어려움. 대신 시연으로 전체 구조를 보여주고, 관심 있는 분은 집에서 차분히 따라 하실 수 있도록 했습니다. 상세: `hands_on/prompts_v2/track_c_연구조수팀.md`
+로컬 모델 설치는 노트북 편차가 커서 45분 안에 전원 성공 보장이 어려움. 대신 시연으로 전체 구조를 보여주고, 관심 있는 분은 집에서 차분히 따라 하실 수 있도록 했습니다. 상세: `hands_on/prompts/track_c_연구조수팀.md`
 
 ---
 
@@ -128,4 +123,4 @@ Part 3 실습 (45-50분)
 
 - 코드 (pptxgenjs 스크립트, 프롬프트 템플릿): **MIT**
 - 문서 (슬라이드 내용, 별첨, README): **CC BY-NC-SA 4.0**
-- 인용된 외부 자료: 각 저자 저작권 유효 (`appendix/references.md` 참조)
+- 인용된 외부 자료: 각 저자 저작권 유효
