@@ -2,7 +2,7 @@
 
 **민감 코퍼스·합성 데이터·검열 편향 통제를 위한 심화 가이드 (Apple Silicon 기준)**
 
-> 이 문서는 별첨 1(로컬 AI 무료 활용 가이드)의 후속입니다. 별첨 1이 "클로드 코드 백엔드 대체"에 초점을 두었다면, 본 문서는 **"정렬(aligned) 모델이 오히려 연구에 해가 되는 상황"**을 다룹니다.
+> 이 문서는 별첨 1(로컬 AI 무료 활용 가이드)의 후속입니다. 별첨 1이 "클로드 코드 백엔드 대체"에 초점을 두었다면, 본 문서는 "정렬(aligned) 모델이 오히려 연구에 해가 되는 상황"을 다룹니다.
 
 ---
 
@@ -55,10 +55,10 @@
 
 본 별첨은 `Jiunsong/supergemma4-26b-uncensored-mlx-4bit-v2`를 예시로 삼습니다. 이유:
 
-- Apple Silicon(M1~M4) 통합메모리에 최적화 → 24~32GB 맥북에서 구동
+- Apple Silicon(M1 - M4) 통합메모리에 최적화 → 24 - 32GB 맥북에서 구동
 - 4-bit 양자화로 디스크 ~13GB, 메모리 ~14GB
 - MLX-LM CLI가 단순하고 OpenAI 호환 서버 제공
-- Google Gemma 3 27B 기반 → 연구 수준 품질
+- Google Gemma 4 26B 기반 → 연구 수준 품질
 
 Windows/Linux 사용자는 Ollama의 `huihui_ai/gemma3-abliterated` 계열로 대체 가능. 본 문서의 개념은 동일하게 적용됩니다.
 
