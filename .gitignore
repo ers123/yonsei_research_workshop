@@ -24,3 +24,20 @@ venv/
 *.tmp
 *.bak
 qa_slides/
+.gstack/
+.omx/
+
+# 워크숍 중 사용자 개인 연구 메모 (공개 대상 아님)
+intereim_research.md
+
+# 사용자 로컬 작업 아티팩트 (중복 PPTX, 임시 다운로드 폴더)
+Vibe_Researching_Workshop (1).pptx
+Vibe_Researching_Workshop*(*).pptx
+Yonsei/
+
+# 슬라이드 전체 — Google Drive 로 별도 공유 (공개 repo 에는 포함 안 함)
+slides/
+*.pptx
+
+# Streamlit "나만의 연구팀" 앱 — 강사 라이브 데모 전용, 소스 비공개
+demo/streamlit_research_team/

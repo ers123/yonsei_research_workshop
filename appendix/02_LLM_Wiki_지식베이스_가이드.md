@@ -3,7 +3,6 @@
 
 > 원본: Andrej Karpathy, "LLM Wiki" (gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
 > 참고: "AI 토큰 84% 절감 LLM Wiki 패턴" (헤이제임스, YouTube), "How to Build a Personal LLM Knowledge Base" (Upgraded, YouTube)
-> 번역 + 연구 적용 보충: 이요한 | HarmonyOn
 
 ---
 
@@ -256,4 +255,3 @@ index.md와 log.md도 함께 생성해줘.
 ---
 
 *Vibe Researching Workshop | 연세대학교 생활과학대학 | 2026년 4월*
-*이요한 | HarmonyOn*

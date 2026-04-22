@@ -29,39 +29,12 @@
 
 | 도구 | 설명 | 링크 |
 |---|---|---|
-| Claude | 대화형 AI | https://claude.ai |
-| Claude Code | Terminal agentic coding | https://www.anthropic.com/claude-code |
-| ChatGPT | 대화형 AI | https://chat.openai.com |
 | Ollama | 로컬 모델 실행 | https://ollama.com |
 | OpenRouter | 다중 모델 API 브로커 | https://openrouter.ai |
-| NotebookLM | 문서 기반 AI 보조 | https://notebooklm.google.com |
-| Perplexity | AI 검색 엔진 | https://perplexity.ai |
 | PaperVizAgent | 논문 figure 자동 생성 (Google Research) | https://github.com/google-research/papervizagent |
 | NTIS (국가과학기술정보서비스) | 국내 연구과제 DB | https://www.ntis.go.kr |
 | IRIS (범부처통합연구지원시스템) | 연구 관리 | https://www.iris.go.kr |
 | Obsidian | 로컬 노트/PKM | https://obsidian.md |
-
-## 영상 / 강의 (Video & Lectures)
-
-| 인용 | 출처 |
-|---|---|
-| "연구자를 위한 AI Agents 입문" | 강의록 (2026) |
-| "AI Ethics in Research" | Stapleton, A. (2026). YouTube. |
-| LLM Wiki 한국어 해설 | 헤이제임스 / Upgraded (YouTube) |
-
-## 시각 자료 (Images)
-
-| 이미지 | 저작권자 | 사용 조건 |
-|---|---|---|
-| Human-in-the-loop 카툰 (slide 11) | Marketoonist © | 교육 목적 인용, 저작자 표기 필수 |
-| LLM-Powered PKM System (slide 15) | Andrej Karpathy © | 교육 목적 인용, 저작자 표기 필수 |
-
----
-
-## 작년(2025) 워크숍 자료
-
-작년 6월 30일 진행된 동일 워크숍 시리즈의 자료 — 이번 해 Part 1(회고)의 기반.
-비공개 자료로, 필요 시 강사에게 직접 요청.
 
 ---
 

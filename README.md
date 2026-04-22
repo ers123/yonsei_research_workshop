@@ -12,50 +12,63 @@
 ## 이 repo를 보는 3가지 방법
 
 ### 1. 워크숍에 참석하셨다면 — 복기용
-- `slides/`에서 당일 슬라이드 다시 보기
+- 슬라이드는 Google Drive 링크(강사에게 요청)로 다시 보기
 - `hands_on/prompts_v2/`에서 본인 트랙 프롬프트 복붙해서 재실행
 - `appendix/`에서 심화 주제 (로컬 AI, LLM Wiki) 읽기
 
 ### 2. 워크숍을 놓치셨다면 — 자습용
-1. `slides/Vibe_Researching_Workshop_2026_v2.pdf` 먼저 훑기
+1. Google Drive 의 슬라이드 먼저 훑기 (강사 이메일로 링크 요청)
 2. `hands_on/SETUP.md`로 환경 준비
 3. `hands_on/prompts_v2/`의 트랙 A → B → C 순서대로 실행
 4. `demo/qualitative_research/`에서 실제 프로젝트 사례 감 잡기
 
 ### 3. 이것을 본인 강의에서 재활용하고 싶다면
-- `slides/src/`에 PPTX 생성 소스(pptxgenjs) 전체 공개
-- `create_slides_v2.js` 수정 후 `node create_slides_v2.js`로 본인 버전 제작 가능
-- CC BY-NC-SA 4.0 라이선스 (비영리 공유 OK, 수정 버전도 같은 조건)
+- 프롬프트/템플릿/핸즈온 자료는 전부 공개 (CC BY-NC-SA 4.0)
+- 슬라이드 소스(pptxgenjs)는 강사에게 요청 시 공유 가능
+- 비영리 공유 OK, 수정 버전도 같은 조건
 
 ---
 
 ## 폴더 안내
 
 ```
-├── slides/                           — 강의 슬라이드
-│   ├── Vibe_Researching_Workshop_2026_v2.pptx
-│   ├── Vibe_Researching_Workshop_2026_v2.pdf
-│   └── src/                          — 슬라이드 소스 (pptxgenjs)
+├── (슬라이드는 Google Drive 로 별도 공유 — 강사에게 링크 요청)
 │
 ├── appendix/                         — 별첨 자료
-│   ├── 01_로컬AI_무료_활용_가이드.md
-│   ├── 02_LLM_Wiki_지식베이스_가이드.md
-│   └── references.md                 — 워크숍 인용 자료 전체
+│   ├── 01_로컬AI_무료_활용_가이드.md  — Ollama, 모델 비교(Gemma 4 / Qwen3 / Phi-4), 비용
+│   ├── 02_LLM_Wiki_지식베이스_가이드.md — 개인 지식 축적 구조
+│   ├── 03_NTIS_차별성검토_가이드.md   — 국가 R&D 과제 검색 + AI 분석 흐름
+│   └── references.md                 — 워크숍 인용 자료 전체 (논문·블로그·보고서)
 │
 ├── hands_on/                         — 실습 자료
-│   ├── SETUP.md                      — 사전 환경 설치
-│   ├── prompts_v2/                   — 3 트랙 실습 프롬프트
+│   ├── SETUP.md                      — 사전 환경 설치 (Mac/Windows/Linux)
+│   ├── prompts_v2/                   — 트랙 실습 프롬프트 + 예시
 │   │   ├── track_a_맥락문서.md
 │   │   ├── track_b_대량처리.md
-│   │   └── track_c_연구조수팀.md
-│   ├── prompts/                      — V1 프롬프트 (참고용)
-│   └── templates/                    — CLAUDE.md, AGENTS.md 템플릿
+│   │   ├── track_c_연구조수팀.md      — 강사 데모 스크립트 + 홈스터디
+│   │   └── track_c_홈스터디_완주예시.md — 외부 도움 없이 완주 가능한 단계별
+│   ├── sample_data/                  — Track B 실습 자료
+│   │   ├── ai_index/                 — AI Index 2026 PDF (37MB)
+│   │   │   ├── ai_index_report_2026.pdf
+│   │   │   ├── ai_index_extracted_backup.md     — 미리 추출된 백업
+│   │   │   └── naive_vs_harness_examples.md     — 실제 비교 응답 예시
+│   │   └── sample_01~10.txt          — 심화 자습용 (가상 논문 10건)
+│   ├── templates/                    — CLAUDE.md, AGENTS.md 템플릿
+│   │   ├── CLAUDE.md.example
+│   │   ├── CLAUDE.md.filled_example  — 완성된 맥락 문서 사례
+│   │   ├── AGENTS.md.example
+│   │   └── A_vs_B_response_examples.md — Track A 비교 응답 예시
+│   ├── references/                   — Claude Code 퀵가이드 · 사용가이드 (자습용)
+│   ├── scenario_comparison/          — 4모델 교차검증 실제 결과 (Scenario B)
+│   ├── ra_team_setup.md              — RA 팀 상세 구성 가이드
+│   └── ra_team_tiers.md              — Free/Standard/Full 비용 비교
 │
 └── demo/
-    └── qualitative_research/         — 질적연구 mini 데모
-        ├── PLAN.md                   — 데모 생성 계획
-        └── (Claude Code로 PLAN.md 따라 생성)
+    └── qualitative_research/         — 질적연구 데모 (PDF→코드북→분석)
 ```
+
+> **슬라이드(.pptx)**: 공개 repo 에는 포함하지 않고 Google Drive 로 별도 공유. 링크는 amazone1@daum.net 로 요청.
+> **Streamlit "나만의 연구팀" 앱**: 강사 라이브 데모 전용 소스로 공개 repo 에서 제외. 같은 개념을 **Claude Code + Ollama** 터미널 기반으로 재현하는 가이드는 `hands_on/ra_team_setup.md` 와 `hands_on/prompts_v2/track_c_연구조수팀.md` 에 있음.
 
 ---
 
@@ -64,14 +77,28 @@
 | 파트 | 시간 | 내용 |
 |---|---|---|
 | Part 1 | 13:30–14:00 | **왜, 어떻게 바뀌고 있나** — 3단계 진화 (Prompt → Context → Harness) + 용어 정리 |
-| Part 2 | 14:00–14:45 | **강사 실전 사례 3가지** — ① 맥락 문서 ② 대량 자료 처리 ③ 연구 조수 팀 |
-| Part 3 | 14:45–15:30 | **스튜디오 실습** — 3 트랙 중 선택, 강사가 돌며 코칭 |
+| Part 2 | 14:00–14:45 | **강사 실전 사례 3가지** — ① 맥락 문서 ② 대량 자료 처리 ③ 연구 조수 팀 (라이브 데모) |
+| Part 3 | 14:45–15:30 | **스튜디오 실습** — Track A + B **전원 진행**, 강사가 돌며 코칭 |
 
-### 3 트랙
+### 실습 구조 (2026-04-18 개편)
 
-- **트랙 A — 맥락 문서 만들기**: 본인 연구에 CLAUDE.md를 적용해보고, 맥락 유/무 차이를 비교
-- **트랙 B — 대량 자료 처리**: 샘플 PDF 10건으로 추출 → 구조화 → 조회를 한 사이클
-- **트랙 C — 연구 조수 팀 맛보기**: Claude Code + Ollama로 역할별 에이전트 구성
+```
+Part 3 실습 (45-50분)
+├─ Track A — 맥락 문서 만들기 (20-25분)
+│   본인 CLAUDE.md 작성 + 맥락 유/무 비교
+│
+└─ Track B — 대량 자료 처리 (30-35분)
+    AI Index 2026 PDF로 Naive vs Harness 비교
+```
+
+- **트랙 A**: 브라우저만 있으면 OK. 본인 연구 주제에 맞는 `CLAUDE.md`를 만들고, 맥락 유/무에서 같은 질문이 얼마나 달라지는지 체감
+- **트랙 B**: 강사 제공 AI Index Report 2026 (37MB 공개 리포트)로 "Naive 접근 vs 중간 산출물 추출" 대비 실습. Claude Code 있으면 직접 추출, 없으면 미리 준비된 추출본 사용
+
+### Track C는?
+
+**Part 2 라이브 데모** (강사 시연 12-15분, Streamlit "나만의 연구팀" 앱 시연 중심) + **홈스터디 가이드** (리포에서 단계별 재현 가능).
+
+로컬 모델 설치는 노트북 편차가 커서 45분 안에 전원 성공 보장이 어려움. 대신 시연으로 전체 구조를 보여주고, 관심 있는 분은 집에서 차분히 따라 하실 수 있도록 했습니다. 상세: `hands_on/prompts_v2/track_c_연구조수팀.md`
 
 ---
 
@@ -88,7 +115,7 @@
 
 단, **이는 자동화 극단(Sakana AI Scientist)이 아닙니다.** Zhang (2026)의 "Vibe Researching"이 말하는 중도 — 연구자가 의도와 검증을 책임지고, 에이전트가 실행 기술을 맡는 — 가 우리의 포지션입니다.
 
-검증부채(Verification Debt, Kwon 2026), AI Brain Fry (BCG 2026) 같은 리스크도 함께 고려합니다. `slides/` 후반부 참조.
+검증부채(Verification Debt, Kwon 2026), AI Brain Fry (BCG 2026) 같은 리스크도 함께 고려합니다. 슬라이드 후반부 참조.
 
 ---
 
