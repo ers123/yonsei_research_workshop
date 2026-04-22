@@ -622,5 +622,5 @@ Uncensored 모델의 가치는 **"더 과감한 출력"이 아니라 "연구 데
 
 **작성**: 2026-04-21 / 이요한 + Claude Code (Opus 4.7)
 **라이선스**: CC BY-NC-SA 4.0
-**문의**: amazone1@daum.net
+**문의**: yohan.harmony@gmail.com
 **버전**: v1.0 — 초안

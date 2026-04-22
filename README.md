@@ -67,7 +67,7 @@
     └── qualitative_research/         — 질적연구 데모 (PDF→코드북→분석)
 ```
 
-> **슬라이드(.pptx)**: 공개 repo 에는 포함하지 않고 Google Drive 로 별도 공유. 링크는 amazone1@daum.net 로 요청.
+> **슬라이드(.pptx)**: 공개 repo 에는 포함하지 않고 Google Drive 로 별도 공유. 링크는 yohan.harmony@gmail.com 로 요청.
 > **Streamlit "나만의 연구팀" 앱**: 강사 라이브 데모 전용 소스로 공개 repo 에서 제외. 같은 개념을 **Claude Code + Ollama** 터미널 기반으로 재현하는 가이드는 `hands_on/ra_team_setup.md` 와 `hands_on/prompts_v2/track_c_연구조수팀.md` 에 있음.
 
 ---
@@ -121,7 +121,7 @@ Part 3 실습 (45-50분)
 
 ## 피드백 / 문의
 
-- 내용 관련: amazone1@daum.net
+- 내용 관련: yohan.harmony@gmail.com
 - 레포 이슈: GitHub Issues
 
 ---
