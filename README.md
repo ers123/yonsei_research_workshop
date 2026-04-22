@@ -24,7 +24,6 @@
 
 ### 3. 이것을 본인 강의에서 재활용하고 싶다면
 - 프롬프트/템플릿/핸즈온 자료는 전부 공개 (CC BY-NC-SA 4.0)
-- 슬라이드 소스(pptxgenjs)는 강사에게 요청 시 공유 가능
 - 비영리 공유 OK, 수정 버전도 같은 조건
 
 ---
@@ -67,7 +66,7 @@
     └── qualitative_research/         — 질적연구 데모 (PDF→코드북→분석)
 ```
 
-> **슬라이드(.pptx)**: 공개 repo 에는 포함하지 않고 Google Drive 로 별도 공유. 링크는 yohan.harmony@gmail.com 로 요청.
+> **슬라이드**: 공개 repo 에는 포함하지 않고 Google Drive 로 별도 공유. 링크는 yohan.harmony@gmail.com 로 요청.
 > **Streamlit "나만의 연구팀" 앱**: 강사 라이브 데모 전용 소스로 공개 repo 에서 제외. 같은 개념을 **Claude Code + Ollama** 터미널 기반으로 재현하는 가이드는 `hands_on/ra_team_setup.md` 와 `hands_on/prompts_v2/track_c_연구조수팀.md` 에 있음.
 
 ---
@@ -96,7 +95,7 @@ Part 3 실습 (45-50분)
 
 ### Track C는?
 
-**Part 2 라이브 데모** (강사 시연 12-15분, Streamlit "나만의 연구팀" 앱 시연 중심) + **홈스터디 가이드** (리포에서 단계별 재현 가능).
+**Part 2 라이브 데모** (강사 시연 12-15분, "나만의 연구팀" 앱 시연 중심) + **홈스터디 가이드** (리포에서 단계별 재현 가능).
 
 로컬 모델 설치는 노트북 편차가 커서 45분 안에 전원 성공 보장이 어려움. 대신 시연으로 전체 구조를 보여주고, 관심 있는 분은 집에서 차분히 따라 하실 수 있도록 했습니다. 상세: `hands_on/prompts_v2/track_c_연구조수팀.md`
 
@@ -122,7 +121,6 @@ Part 3 실습 (45-50분)
 ## 피드백 / 문의
 
 - 내용 관련: yohan.harmony@gmail.com
-- 레포 이슈: GitHub Issues
 
 ---
 
