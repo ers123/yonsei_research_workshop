@@ -555,7 +555,7 @@ Kwon(2026)이 말하는 검증부채는 uncensored 모델에서 **더 커질 수
 | 응답 갑자기 끊김 | max_tokens 부족 + thinking 영어 선행 | 3000↑로 설정 |
 | 모델이 추론 과정을 영어로 출력 | 이 모델의 thinking/channel 구조 | `<channel\|>` 이후 텍스트만 파싱 |
 | Jupyter에서 느림 | 매 셀마다 모델 리로드 | `mlx_lm.server` 모드 + openai SDK |
-| Claude Code 연동 실패 | 토큰 형식 불일치 | OpenAI 호환 모드이므로 `ANTHROPIC_BASE_URL` 대신 `OPENAI_BASE_URL` 사용 |
+| Claude Code 연동 실패 | `mlx_lm.server` 는 OpenAI 호환만 제공, Claude Code 는 Anthropic 포맷 필요 | 번역 프록시(claude-code-router 등) 사용 또는 LM Studio 로 모델 로드 — 상세: `hands_on/ra_team_setup.md` Section 4 Step 3 |
 
 ---
 

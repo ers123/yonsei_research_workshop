@@ -52,23 +52,26 @@ nomic-embed-text             274 MB    임베딩 (RAG용)
 
 ## Claude Code 로컬 모델 연결
 
+> Claude Code 는 Anthropic Messages API 포맷만 통신합니다. Ollama 기본 포트(11434)는 OpenAI-호환 포맷 — 직접 연결되지 않습니다. 상세 설정 경로(LM Studio 권장 / Ollama + 프록시)는 `hands_on/ra_team_setup.md` Section 4 Step 3 참조.
+
 ```bash
-# 기본 사용 (Anthropic API)
+# 기본 사용 (Anthropic API, 클라우드)
 claude
 
-# 로컬 모델 사용 (무료)
-ANTHROPIC_BASE_URL=http://localhost:11434/v1 \
-ANTHROPIC_MODEL=qwen3.5:9b \
+# 로컬 모델 사용 — 강사 환경 (LM Studio llmster 서버가 :1234 에 떠있는 상태)
+export ANTHROPIC_BASE_URL=http://localhost:1234
+export ANTHROPIC_AUTH_TOKEN=lmstudio
 claude
 ```
 
-### alias (강사 환경)
+### alias (강사 환경, LM Studio 기준)
 
 ```bash
 # ~/.zshrc
-alias claude-local='ANTHROPIC_BASE_URL=http://localhost:11434/v1 ANTHROPIC_MODEL=qwen3.5:9b claude'
-alias claude-deepseek='ANTHROPIC_BASE_URL=http://localhost:11434/v1 ANTHROPIC_MODEL=deepseek-r1:14b claude'
+alias claude-local='ANTHROPIC_BASE_URL=http://localhost:1234 ANTHROPIC_AUTH_TOKEN=lmstudio claude'
 ```
+
+모델 선택은 Claude Code 안에서 `/model` 명령으로 — LM Studio 가 로드한 모델이 목록에 뜹니다.
 
 ## RA 팀 아키텍처
 
