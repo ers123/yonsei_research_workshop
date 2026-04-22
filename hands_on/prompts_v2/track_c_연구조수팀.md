@@ -27,10 +27,12 @@
 
 ---
 
-## 사전 준비 (데모 시작 10분 전)
+> **⚠️ 아래 Part A (사전 준비 + 라이브 데모 스크립트) 는 강사 전용입니다.** 참가자는 [Part B — 홈스터디 가이드](#part-b--홈스터디-가이드) 섹션부터 보시면 됩니다. Streamlit 앱은 공개 repo 에 포함되지 않아 집에서는 실행 불가 — 홈스터디는 Claude Code + Ollama 기반 터미널 재현으로 동일한 3-agent 파이프라인을 구축합니다.
+
+## 사전 준비 (데모 시작 10분 전 — 강사 전용)
 
 - [ ] Claude Code 실행 상태, 시연용 `~/workshop_demo/` 폴더 + CLAUDE.md 준비
-- [ ] Streamlit 앱 실행 상태: `cd demo/streamlit_research_team && streamlit run app.py`
+- [ ] Streamlit 앱 실행 상태 (강사 로컬 사본): `cd demo/streamlit_research_team && streamlit run app.py`
   → 브라우저에 http://localhost:8501 띄워둠
 - [ ] Ollama `gemma4` 모델 **미리 로드** (`ollama run gemma4 "hi"` 한 번 실행 → 메모리 점유)
 - [ ] `hands_on/scenario_comparison/scenario_b/05_cross_validation_4models.md` 탭에서 열어둠
