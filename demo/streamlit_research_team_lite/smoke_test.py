@@ -141,11 +141,19 @@ def main() -> int:
         'gemma4:e4b' in app_text,
     )
     check(
-        'LITE_REQUIRED_MODEL = "gemma4:e4b"',
-        'LITE_REQUIRED_MODEL = "gemma4:e4b"' in app_text,
+        'LITE_ALLOWED_MODELS ladder exists',
+        'LITE_ALLOWED_MODELS' in app_text and '("gemma4:e4b"' in app_text,
     )
     check(
-        'lite_model_available helper exists',
+        'Ladder includes 3 tiers (16GB, 8GB, 4GB)',
+        'gemma4:e4b' in app_text and 'qwen2.5:3b' in app_text and 'gemma3:1b' in app_text,
+    )
+    check(
+        'lite_model_pick helper exists',
+        'def lite_model_pick' in app_text,
+    )
+    check(
+        'lite_model_available back-compat shim',
         'def lite_model_available' in app_text,
     )
     check(
@@ -170,21 +178,33 @@ def main() -> int:
     )
 
     # Runtime behavior check via actual import (no streamlit context needed for helpers)
-    from app import lite_model_available, LITE_REQUIRED_MODEL
+    from app import lite_model_pick, lite_model_available
     check(
-        'lite_model_available — exact match works',
-        lite_model_available([("gemma4:e4b", 3.0), ("other", 5.0)]) is True,
+        'lite_model_pick — both tiers installed → prefers e4b',
+        lite_model_pick([("gemma4:e4b", 9.6), ("qwen2.5:3b", 2.0)])[0] == "gemma4:e4b",
     )
     check(
-        'lite_model_available — suffix variant works (e4b-it-q4)',
-        lite_model_available([("gemma4:e4b-it-q4_K_M", 3.0)]) is True,
+        'lite_model_pick — 8GB fallback → qwen2.5:3b',
+        lite_model_pick([("qwen2.5:3b", 2.0), ("ex", 5.0)])[0] == "qwen2.5:3b",
     )
     check(
-        'lite_model_available — missing → False',
-        lite_model_available([("gemma4:26b", 16.8), ("gemma4:latest", 9.6)]) is False,
+        'lite_model_pick — 4GB fallback → gemma3:1b',
+        lite_model_pick([("gemma3:1b", 0.8)])[0] == "gemma3:1b",
     )
     check(
-        'lite_model_available — empty → False',
+        'lite_model_pick — suffix variant (e4b-it-q4)',
+        lite_model_pick([("gemma4:e4b-it-q4_K_M", 9.6)]) is not None,
+    )
+    check(
+        'lite_model_pick — none of allowed → None',
+        lite_model_pick([("gemma4:26b", 16.8), ("deepseek-r1:14b", 8.4)]) is None,
+    )
+    check(
+        'lite_model_available back-compat — True when any tier installed',
+        lite_model_available([("qwen2.5:3b", 2.0)]) is True,
+    )
+    check(
+        'lite_model_available back-compat — False when none',
         lite_model_available([]) is False,
     )
 

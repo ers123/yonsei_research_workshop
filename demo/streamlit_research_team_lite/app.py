@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""나만의 연구팀 — Lite (16GB 노트북용).
+"""나만의 연구팀 — Lite (경량 변형, 저-중사양 노트북용).
 
 원본 streamlit_research_team 의 경량 변형:
-- 기본 모델: gemma4:e4b 단일 (약 3GB)
-- 에이전트별 모델 지정 기본 ON (세 역할 모두 e4b 시작 — 프롬프트 스왑만으로 역할 차별화)
+- 지원 모델 사다리 (자동 선택): gemma4:e4b (16GB+) → qwen2.5:3b (8GB) → gemma3:1b (4GB)
+  설치된 것 중 최상위 자동 적용. 사용자가 RAM 에 맞게 하나만 pull 하면 됨.
+- 에이전트별 모델 지정 기본 ON (세 역할 모두 active 모델로 시작 — 프롬프트 스왑만으로 역할 차별화)
 - 완주 후 여력이 있으면 한 역할을 더 큰 모델(또는 다른 계열)로 교체해 '티키타카' 확장
 
-핵심 메시지: 같은 4B 모델 · 같은 하네스 · 역할별 프롬프트 3개 만으로도
+핵심 메시지: 같은 경량 모델 · 같은 하네스 · 역할별 프롬프트 3개 만으로도
 3-에이전트 파이프라인이 돈다. 모델 크기보다 역할 설계가 먼저다.
 """
 
@@ -625,20 +626,41 @@ DEFAULT_STATE = {
     },
 }
 
-# Lite 변형은 이 모델만 지원 — fallback 없음.
-# "가벼운 단일 모델 × 역할별 프롬프트" 메시지를 흐리지 않기 위해 명시적으로 고정.
-LITE_REQUIRED_MODEL = "gemma4:e4b"
+# Lite 지원 모델 사다리 — 품질 > 필요 RAM 순.
+# 16GB 이상 사용자는 gemma4:e4b, 8GB 사용자는 qwen2.5:3b, 구형/저가 머신은 gemma3:1b.
+# 설치된 것 중 최상위 모델을 자동 선택. 기본 경험은 단일 모델 × 3 역할.
+LITE_ALLOWED_MODELS = [
+    # (model_tag,       disk_size,  recommended_ram,  note_ko)
+    ("gemma4:e4b",      "9.6GB",    "16GB+",   "권장 · 한국어·추론 모두 강함"),
+    ("qwen2.5:3b",      "2GB",      "8GB+",    "8GB 대안 · 한국어 OK"),
+    ("gemma3:1b",       "0.8GB",    "4GB+",    "최소 사양 · 짧은 응답 위주"),
+]
+# Default (when nothing installed) — shown in the install prompt
+LITE_PREFERRED_MODEL = LITE_ALLOWED_MODELS[0][0]
 
+
+def lite_model_pick(installed):
+    """Return the first allowed model that is installed, along with metadata.
+
+    Returns (tag, disk_size, ram_hint, note_ko) or None if none installed.
+    Matches both 'gemma4:e4b' and 'gemma4:e4b-...' suffixed variants.
+    """
+    if not installed:
+        return None
+    names = [m[0] for m in installed]
+    for tag, size, ram, note in LITE_ALLOWED_MODELS:
+        for n in names:
+            if n == tag or n.startswith(tag + "-"):
+                return (n, size, ram, note)
+    return None
+
+
+# Back-compat shim for older references / smoke test
+LITE_REQUIRED_MODEL = LITE_PREFERRED_MODEL
 
 def lite_model_available(installed) -> bool:
-    """Return True iff the required Lite model is installed.
-    Matches both 'gemma4:e4b' and 'gemma4:e4b-...' variants."""
-    if not installed:
-        return False
-    for name, _size in installed:
-        if name == LITE_REQUIRED_MODEL or name.startswith(LITE_REQUIRED_MODEL + "-"):
-            return True
-    return False
+    """Return True iff any of the allowed Lite models is installed."""
+    return lite_model_pick(installed) is not None
 
 
 ROLE_ORDER = ["scout", "critic", "director", "advisor"]
@@ -780,7 +802,7 @@ def extract_final_doc(director_output: str) -> str:
 
 def main():
     st.set_page_config(
-        page_title="연구팀 Lite — gemma4:e4b × 3 roles",
+        page_title="연구팀 Lite — single model × 3 roles",
         page_icon=None,
         layout="wide",
     )
@@ -796,7 +818,7 @@ def main():
     with st.sidebar:
         st.markdown('<div class="sidebar-brand">연구팀 · Lite</div>', unsafe_allow_html=True)
         st.markdown(
-            '<div class="sidebar-brand-sub">gemma4:e4b × 3 roles · 16GB-friendly</div>',
+            '<div class="sidebar-brand-sub">single model × 3 roles · 4-16GB friendly</div>',
             unsafe_allow_html=True,
         )
         st.markdown("---")
@@ -808,41 +830,69 @@ def main():
             st.markdown('<div class="sidebar-status sidebar-status-err">Ollama 연결 실패</div>', unsafe_allow_html=True)
             st.code("ollama serve", language="bash")
 
-        # Lite 전용 모델 상태 카드
+        # Lite 전용 모델 상태 카드 — 사다리 자동 선택
         st.markdown('<div class="section-label">Lite 모델</div>', unsafe_allow_html=True)
-        has_lite = lite_model_available(installed)
-        selected_model = LITE_REQUIRED_MODEL  # Lite 는 이것만 씀
+        pick = lite_model_pick(installed)
+        has_lite = pick is not None
 
         if has_lite:
-            # 녹색 "정상" 배지
+            active_tag, active_size, active_ram, active_note = pick
+            # Is this the top (권장) choice, or a lower-rung fallback?
+            is_preferred = active_tag == LITE_PREFERRED_MODEL or active_tag.startswith(LITE_PREFERRED_MODEL + "-")
+            selected_model = active_tag
+            # 녹색 "정상" 배지 — 사다리 내 어느 위치인지 명시
+            tier_note = "" if is_preferred else "  · fallback"
             st.markdown(
                 f'<div style="background:#e8f5e9;border:1px solid #a5d6a7;'
                 f'border-radius:6px;padding:10px 12px;margin:4px 0 8px;'
                 f'font-family:IBM Plex Mono,monospace;font-size:0.75rem;line-height:1.6;">'
-                f'<span style="color:#2e7d32;font-weight:600;">✓ {LITE_REQUIRED_MODEL}</span>'
+                f'<span style="color:#2e7d32;font-weight:600;">✓ {active_tag}</span>'
+                f'<span style="color:#5a7a5d;font-size:0.68rem;">'
+                f' &nbsp;{active_size} · {active_ram}{tier_note}</span>'
                 f'<br><span style="color:#5a7a5d;font-size:0.68rem;">'
-                f'세 역할(수연·준호·지은) 모두 이 모델로 실행됩니다.'
+                f'{active_note} · 세 역할(수연·준호·지은) 모두 이 모델로 실행'
                 f'</span></div>',
                 unsafe_allow_html=True,
             )
+            # If user ALSO has a higher-rung model installed, ignore (we picked the best)
+            # If user has lower-rung fallbacks also installed, show compact info
+            other_allowed = [
+                m[0] for m in installed
+                if any(m[0] == t or m[0].startswith(t + "-") for t, _, _, _ in LITE_ALLOWED_MODELS)
+                and m[0] != active_tag and not m[0].startswith(active_tag + "-")
+            ]
+            if other_allowed:
+                st.markdown(
+                    f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.6rem;'
+                    f'color:#8a8a8a;margin-top:-4px;">'
+                    f'대안 설치됨: {", ".join(other_allowed)} (역할별 드롭다운에서 교체 가능)'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
         else:
-            # 주황 "미설치" 경고 + 설치 명령어
+            selected_model = LITE_PREFERRED_MODEL
+            # 주황 "미설치" 경고 + 사다리 전체 노출
             st.markdown(
-                f'<div style="background:#fff4e5;border:1px solid #ffb74d;'
-                f'border-radius:6px;padding:10px 12px;margin:4px 0 8px;'
-                f'font-family:Noto Sans KR,sans-serif;font-size:0.78rem;line-height:1.6;">'
-                f'<b style="color:#e65100;">⚠ {LITE_REQUIRED_MODEL} 미설치</b><br>'
-                f'<span style="font-size:0.72rem;color:#5a4a3a;">'
-                f'Lite 는 이 모델만 지원합니다 (약 3GB). 터미널에서 pull 후 페이지 새로고침:'
-                f'</span></div>',
+                '<div style="background:#fff4e5;border:1px solid #ffb74d;'
+                'border-radius:6px;padding:10px 12px;margin:4px 0 8px;'
+                'font-family:Noto Sans KR,sans-serif;font-size:0.78rem;line-height:1.6;">'
+                '<b style="color:#e65100;">⚠ Lite 지원 모델 미설치</b><br>'
+                '<span style="font-size:0.72rem;color:#5a4a3a;">'
+                '노트북 RAM 에 맞는 모델 하나를 pull 후 페이지 새로고침:'
+                '</span></div>',
                 unsafe_allow_html=True,
             )
-            st.code(f"ollama pull {LITE_REQUIRED_MODEL}", language="bash")
+            ladder_lines = []
+            for tag, size, ram, note in LITE_ALLOWED_MODELS:
+                ladder_lines.append(f"# {ram:<6} ({size}) — {note}")
+                ladder_lines.append(f"ollama pull {tag}")
+                ladder_lines.append("")
+            st.code("\n".join(ladder_lines).rstrip(), language="bash")
             if installed:
                 other_names = ", ".join(m[0] for m in installed[:4])
                 st.markdown(
                     f'<div style="font-family:IBM Plex Mono,monospace;font-size:0.62rem;'
-                    f'color:#8a8a8a;margin-top:0.3rem;">설치됨: {other_names}</div>',
+                    f'color:#8a8a8a;margin-top:0.3rem;">설치됨 (Lite 지원 외): {other_names}</div>',
                     unsafe_allow_html=True,
                 )
 
@@ -858,19 +908,20 @@ def main():
             model_opts = [m[0] for m in installed]
             # 처음 렌더 전에 세션 상태에 key 를 심어둔다
             # (st.selectbox 의 `index=` 는 세션 key 가 이미 있으면 무시되기 때문)
+            # 기본값 = 사다리에서 선택된 active model (사용자 RAM 에 맞는 것)
             for role in ROLE_ORDER:
                 widget_key = f"agent_model_{role}"
                 if widget_key not in st.session_state:
-                    st.session_state[widget_key] = LITE_REQUIRED_MODEL
+                    st.session_state[widget_key] = selected_model
                 # 설치 목록에서 사라진 모델을 가리키고 있으면 리셋
                 if st.session_state[widget_key] not in model_opts:
-                    st.session_state[widget_key] = LITE_REQUIRED_MODEL
+                    st.session_state[widget_key] = selected_model
 
             st.markdown(
-                '<div style="font-family:Noto Sans KR,sans-serif;font-size:0.72rem;'
-                'color:#5a5a5a;margin:0 0 6px;line-height:1.5;">'
-                '기본: 세 역할 모두 <code style="font-size:0.82em;">gemma4:e4b</code> · '
-                '한 역할만 다른 모델로 바꿔 비판/생성 차이 비교'
+                f'<div style="font-family:Noto Sans KR,sans-serif;font-size:0.72rem;'
+                f'color:#5a5a5a;margin:0 0 6px;line-height:1.5;">'
+                f'기본: 세 역할 모두 <code style="font-size:0.82em;">{selected_model}</code> · '
+                f'한 역할만 다른 모델로 바꿔 비판/생성 차이 비교'
                 '</div>',
                 unsafe_allow_html=True,
             )
@@ -887,10 +938,10 @@ def main():
                 )
                 st.session_state.agent_models[role] = picked
 
-            # 시각적 안내: 몇 개가 Lite 기본에서 벗어났는지
+            # 시각적 안내: 몇 개가 Lite 기본(= 현재 선택된 active model)에서 벗어났는지
             swapped = [
                 r for r in ["scout", "critic", "director"]
-                if st.session_state.agent_models.get(r) != LITE_REQUIRED_MODEL
+                if st.session_state.agent_models.get(r) != selected_model
             ]
             if swapped:
                 st.markdown(
@@ -1003,30 +1054,30 @@ def main():
         unsafe_allow_html=True,
     )
 
-    # Lite 모드 안내 배너
+    # Lite 모드 안내 배너 (현재 active 모델을 반영)
     st.markdown(
-        '<div style="background:linear-gradient(135deg,#eef5ff 0%,#f5f0ff 100%);'
-        'border:1px solid #c5d9f1;border-radius:8px;'
-        'padding:14px 18px;margin:8px 0 14px;'
-        'font-family:Noto Sans KR,sans-serif;font-size:0.84rem;line-height:1.7;'
-        'color:#2c3e50;">'
-        '<div style="font-size:0.95rem;font-weight:600;margin-bottom:6px;">'
-        '🪶 Lite 모드'
-        '</div>'
-        '<div>'
-        '<b>1단계 · 기본 시연</b>: '
-        '<code style="background:#fff;padding:1px 6px;border-radius:3px;'
-        'font-size:0.82em;">gemma4:e4b</code> 단일 모델 × 세 역할 '
-        '(🔍 수연 · 🔬 준호 · 📋 지은) — 프롬프트 스왑만으로 역할 차별화.'
-        '</div>'
-        '<div style="margin-top:4px;">'
-        '<b>2단계 · 티키타카 (선택)</b>: '
-        '사이드바에서 한 역할만 다른 모델로 교체해 모델 간 차이 비교.'
-        '</div>'
-        '<div style="margin-top:6px;font-size:0.74rem;color:#6c7b8a;">'
-        '16GB 노트북에서 돌아가는 선에서 설계 · 완전 오프라인'
-        '</div>'
-        '</div>',
+        f'<div style="background:linear-gradient(135deg,#eef5ff 0%,#f5f0ff 100%);'
+        f'border:1px solid #c5d9f1;border-radius:8px;'
+        f'padding:14px 18px;margin:8px 0 14px;'
+        f'font-family:Noto Sans KR,sans-serif;font-size:0.84rem;line-height:1.7;'
+        f'color:#2c3e50;">'
+        f'<div style="font-size:0.95rem;font-weight:600;margin-bottom:6px;">'
+        f'🪶 Lite 모드'
+        f'</div>'
+        f'<div>'
+        f'<b>1단계 · 기본 시연</b>: '
+        f'<code style="background:#fff;padding:1px 6px;border-radius:3px;'
+        f'font-size:0.82em;">{selected_model}</code> 단일 모델 × 세 역할 '
+        f'(🔍 수연 · 🔬 준호 · 📋 지은) — 프롬프트 스왑만으로 역할 차별화.'
+        f'</div>'
+        f'<div style="margin-top:4px;">'
+        f'<b>2단계 · 티키타카 (선택)</b>: '
+        f'사이드바에서 한 역할만 다른 모델로 교체해 모델 간 차이 비교.'
+        f'</div>'
+        f'<div style="margin-top:6px;font-size:0.74rem;color:#6c7b8a;">'
+        f'사다리 자동 선택: gemma4:e4b (16GB+) → qwen2.5:3b (8GB) → gemma3:1b (4GB) · 완전 오프라인'
+        f'</div>'
+        f'</div>',
         unsafe_allow_html=True,
     )
 
