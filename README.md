@@ -52,14 +52,18 @@
 │   │   └── ai_index/                 — Track B 실습 자료 (PDF 37MB + 백업 + Naive vs Harness 예시)
 │   ├── scenario_comparison/          — 4모델 교차검증 실제 결과 (Scenario B)
 │   ├── ra_team_setup.md              — RA 팀 상세 구성 가이드
-│   └── ra_team_tiers.md              — Free/Standard/Full 비용 비교
+│   ├── ra_team_tiers.md              — Free/Standard/Full 비용 비교
+│   ├── claude_code_agents/           — Claude Code `.claude/agents/` subagent 10개 (scout/critic/director × 3 stages + advisor)
+│   ├── sample_data/                  — 업로드 자료 안내 placeholder
+│   └── 실습_안내문.md                 — 워크숍 당일 참가자용 가이드 (QR 배포)
 │
 └── demo/
-    └── qualitative_research/         — 질적연구 데모 (PDF→코드북→분석)
+    ├── qualitative_research/         — 질적연구 데모 (PDF→코드북→분석)
+    └── streamlit_research_team_lite/ — 연구팀 Lite (Streamlit + Ollama, 단일 모델 × 3 역할, 4-16GB RAM 사다리)
 ```
 
 > **슬라이드(.pptx)**: 공개 repo 에는 포함하지 않고 Google Drive 로 별도 공유. 링크는 yohan.harmony@gmail.com 로 요청.
-> **Streamlit "나만의 연구팀" 앱**: 강사 라이브 데모 전용 소스로 공개 repo 에서 제외. 같은 개념을 **Claude Code + Ollama** 터미널 기반으로 재현하는 가이드는 `hands_on/ra_team_setup.md` 와 `hands_on/prompts/track_c_연구조수팀.md` 에 있음.
+> **Streamlit "나만의 연구팀" 앱**: 현재 **Lite 변형** 이 `demo/streamlit_research_team_lite/` 로 공개돼 있습니다 (16GB/8GB/4GB 3-tier 모델 사다리 자동 선택). Claude Code 사용자는 `hands_on/claude_code_agents/` 에 같은 9개 프롬프트를 네이티브 subagent 형식으로 포팅해두었습니다.
 
 ---
 
@@ -87,9 +91,11 @@ Part 3 실습 (45-50분)
 
 ### Track C는?
 
-**Part 2 라이브 데모** (강사 시연 12-15분, "나만의 연구팀" 앱 시연 중심) + **홈스터디 가이드** (리포에서 단계별 재현 가능).
+**Part 2 라이브 데모** (강사 시연 12-15분, "나만의 연구팀" Lite 앱 시연) + **당일 선택 실습** (노트북 사양 맞는 분) + **홈스터디 가이드**.
 
-로컬 모델 설치는 노트북 편차가 커서 45분 안에 전원 성공 보장이 어려움. 대신 시연으로 전체 구조를 보여주고, 관심 있는 분은 집에서 차분히 따라 하실 수 있도록 했습니다. 상세: `hands_on/prompts/track_c_연구조수팀.md`
+- **16GB+ 노트북 보유자**: `demo/streamlit_research_team_lite/` 의 Lite 앱으로 당일 실습 가능 (Python + Ollama). 8GB 는 `qwen2.5:3b`, 4GB 는 `gemma3:1b` 모델로 fallback 자동.
+- **Claude Code 기존 사용자**: `hands_on/claude_code_agents/` 의 10개 subagent 를 `.claude/agents/` 에 복사하면 바로 동일 파이프라인 실행.
+- **홈스터디**: 노트북 사양이 빠듯하거나 차분히 재현하고 싶은 분은 `hands_on/prompts/track_c_연구조수팀.md` 및 `track_c_홈스터디_완주예시.md` 참조.
 
 ---
 
