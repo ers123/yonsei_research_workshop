@@ -4,9 +4,6 @@
 
 본 repository는 2026년 4월 연세대학교 생활과학대학에서 진행한 워크숍의 자료 모음입니다.
 참가자가 워크숍 이후에도 혼자서 따라 해볼 수 있도록 구성되었습니다.
-
-강사: **이요한** (HarmonyOn) · yohan.harmony@gmail.com
-
 ---
 
 ## 이 repo를 보는 3가지 방법
@@ -85,7 +82,7 @@ Part 3 실습 (45-50분)
     AI Index 2026 PDF로 Naive vs Harness 비교
 ```
 
-- **트랙 A**: 브라우저만 있으면 OK. 본인 연구 주제에 맞는 `CLAUDE.md`를 만들고, 맥락 유/무에서 같은 질문이 얼마나 달라지는지 체감
+- **트랙 A**: 브라우저만 있으면 OK. 본인 연구 주제에 맞는 `CLAUDE.md` 또는 `AGENTS.md`를 만들고, 맥락 유/무에서 같은 질문이 얼마나 달라지는지 체감
 - **트랙 B**: 강사 제공 AI Index Report 2026 (37MB 공개 리포트)로 "Naive 접근 vs 중간 산출물 추출" 대비 실습. Claude Code 있으면 직접 추출, 없으면 미리 준비된 추출본 사용
 
 ### Track C는?
@@ -109,13 +106,7 @@ Part 3 실습 (45-50분)
 
 단, **이는 자동화 극단(Sakana AI Scientist)이 아닙니다.** Zhang (2026)의 "Vibe Researching"이 말하는 중도 — 연구자가 의도와 검증을 책임지고, 에이전트가 실행 기술을 맡는 — 가 우리의 포지션입니다.
 
-검증부채(Verification Debt, Kwon 2026), AI Brain Fry (BCG 2026) 같은 리스크도 함께 고려합니다. 슬라이드 후반부 참조.
-
----
-
-## 피드백 / 문의
-
-- 내용 관련: yohan.harmony@gmail.com
+검증부채(Verification Debt, Kwon 2026), AI Brain Fry (BCG 2026) 같은 리스크도 함께 고려합니다. 
 
 ---
 
