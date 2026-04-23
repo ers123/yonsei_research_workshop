@@ -1,25 +1,24 @@
 # 연구팀 Lite — 16GB 노트북용
 
-`demo/streamlit_research_team/` 의 **경량 변형**. 단일 4B 모델(`gemma4:e4b`) 로 세 에이전트 역할 전부를 돌립니다. 16GB RAM · Intel Mac 포함 · macOS 12 에서도 작동.
+단일 4B 모델(`gemma4:e4b`) 로 세 에이전트 역할 전부를 돌리는 **경량 버전**. 16GB RAM · Intel Mac 포함 · macOS 12 에서도 작동.
 
-> **포지셔닝**: 풀 버전은 에이전트별로 다른 모델(4B/9B/14B)을 섞는 고급 시연용, Lite 는 **"같은 모델 · 역할별 프롬프트만 다름"** 을 증명하는 미니멀 버전.
+> **포지셔닝**: "같은 모델 · 역할별 프롬프트만 다름" 을 증명하는 미니멀 버전.
 >
 > 핵심 메시지: **모델 크기보다 역할 설계(=하네스)가 먼저다.**
 
 ---
 
-## 풀 버전과 무엇이 다른가
+## 같은 파이프라인의 3가지 도구
 
-| 항목 | 풀 버전 (`streamlit_research_team`) | **Lite 변형** |
+같은 "3-role × 3-stage = 9 prompts + 감독 persona" 구조를 세 가지 다른 도구로 실현할 수 있습니다:
+
+| 도구 | 경로 | 대상 |
 |---|---|---|
-| 기본 모델 | 사이드바 자동 감지, 첫 번째 | **gemma4:e4b 전용 (fallback 없음)** — 미설치면 경고 + pull 명령 표시 |
-| 에이전트별 모델 지정 | 기본 OFF | **기본 ON, 세 역할 모두 e4b** |
-| 기본 화면 | 일반 v2 배너 | **🪶 Lite 모드 안내 박스** 상단 고정 |
-| 권장 하드웨어 | 16GB+ (다중 모델 시 32GB 권장) | **16GB · 단일 모델 · 다른 앱 닫고 여유 메모리 확보** |
-| 프롬프트 · 파이프라인 | 동일 (`agents.py` 공유) | **동일** — 같은 하네스 |
-| 산출물 · 세션 저장 | 동일 | **동일** |
+| **Streamlit Lite (이 폴더)** | `demo/streamlit_research_team_lite/` | 비CLI · 완전 로컬 Ollama · GUI |
+| **Claude Code subagents** | `hands_on/claude_code_agents/` | Claude Code 사용자 · 네이티브 CLI · Anthropic 클라우드 |
+| **Scholar-skill** (Zhang 2026) | 외부 arXiv 레퍼런스 | 연구실 풀 자동화 (26 skills × 18 phases × 53 quality gates) |
 
-구현은 **`app.py` 의 기본값 몇 개만 바꾼 가벼운 변형**입니다. 두 폴더의 `agents.py`·`exporters.py`·`sessions.py`·`resources.py` 는 같은 내용.
+세 가지는 모두 **같은 프롬프트 구조를 공유** — 본 repo 의 `agents.py::STAGE_PROMPTS` 가 기준 SSOT (Single Source Of Truth).
 
 ---
 
@@ -29,7 +28,7 @@
 
 ```bash
 # Ollama 설치 (macOS 14+ 는 공식 .dmg, 아니면 curl install)
-# 상세: ../streamlit_research_team/README.md 또는 hands_on/SETUP.md
+# 상세: hands_on/SETUP.md
 
 # Lite 전용 모델 pull (~9.6GB, 5-15분)
 ollama pull gemma4:e4b
@@ -125,7 +124,9 @@ streamlit run app.py
 | 15분 실습 | 16GB+ 노트북 보유자 | 위 1단계 완주 + 2단계 실험 A 중 하나 |
 | 홈스터디 | 관심 참석자 | 2단계 실험 A+B 전부 + 지도교수 모드 |
 
-**풀 버전으로 업그레이드**: Lite 로 익숙해진 뒤 `../streamlit_research_team/` 에서 26B MoE 급 모델 혼합 실험. 같은 프롬프트, 같은 UI, 모델만 바뀜.
+**다른 도구로 전환**:
+- **Claude Code 쓰시는 분** → `hands_on/claude_code_agents/` 에 같은 9개 프롬프트를 `.claude/agents/` 형식으로 포팅. 설치 5분.
+- **32GB + M시리즈 · 고급 시연** → 직접 `app.py` 의 `LITE_REQUIRED_MODEL` 을 더 큰 모델로 교체하거나 `per_agent_mode` 에서 역할마다 다른 모델 지정.
 
 ---
 
