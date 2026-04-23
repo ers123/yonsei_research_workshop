@@ -26,9 +26,9 @@
 
 ### 1. Ollama + 모델 준비
 
-**macOS**: https://ollama.com/download/mac (또는 `brew install ollama`)
-**Windows**: https://ollama.com/download/windows (설치 시 자동 백그라운드 실행)
-**Linux**: `curl -fsSL https://ollama.com/install.sh | sh`
+- **macOS**: https://ollama.com/download/mac (또는 `brew install ollama`)
+- **Windows**: https://ollama.com/download/windows (설치 시 자동 백그라운드 실행)
+- **Linux**: `curl -fsSL https://ollama.com/install.sh | sh`
 
 설치 후 공통:
 ```bash
