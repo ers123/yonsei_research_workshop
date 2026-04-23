@@ -24,22 +24,52 @@
 
 ```bash
 claude --version
-# 없으면: curl -fsSL https://claude.ai/install.sh | bash
+```
+
+없으면 OS 별로:
+
+**macOS / Linux**:
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+# PATH 경고 나오면 출력된 echo 명령 실행 후 터미널 재시작
+```
+
+**Windows (PowerShell)**:
+```powershell
+irm https://claude.ai/install.ps1 | iex
+# 실행 정책 에러 시: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 ```
 
 ### 2) 본인 프로젝트에 agents 복사
 
 **옵션 A — 프로젝트별 (해당 프로젝트 폴더에서만 작동)**:
+
+macOS / Linux:
 ```bash
 cd /path/to/your/research-project
 mkdir -p .claude/agents
 cp hands_on/claude_code_agents/*.md .claude/agents/
 ```
 
+Windows PowerShell:
+```powershell
+cd C:\path\to\your\research-project
+New-Item -ItemType Directory -Force -Path .claude\agents | Out-Null
+Copy-Item hands_on\claude_code_agents\*.md .claude\agents\
+```
+
 **옵션 B — 전역 (모든 Claude Code 세션에서 사용 가능)**:
+
+macOS / Linux:
 ```bash
 mkdir -p ~/.claude/agents
 cp hands_on/claude_code_agents/*.md ~/.claude/agents/
+```
+
+Windows PowerShell:
+```powershell
+New-Item -ItemType Directory -Force -Path $HOME\.claude\agents | Out-Null
+Copy-Item hands_on\claude_code_agents\*.md $HOME\.claude\agents\
 ```
 
 ### 3) 확인

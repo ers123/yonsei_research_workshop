@@ -1,12 +1,16 @@
 # Track C 홈스터디 — 완주 예시
 
-> **⚠️ Streamlit 앱 관련 공지**: 본 문서 후반부(Part 5 전후)의 `demo/streamlit_research_team/` 경로·터미널 예시는 **강사 라이브 데모용 로컬 앱**을 전제로 작성되었습니다. 해당 Streamlit 앱은 공개 repo 에서 제외되어 있어 집에서는 그대로 재현할 수 없습니다. **Part 1-4 의 Claude Code + Ollama 단계만으로도 동일한 3-agent 연구팀 파이프라인을 재현**할 수 있으니 거기까지만 따라가면 홈스터디 완주입니다. Streamlit 앱 부분은 시연 영상 / 스크린샷 참고용으로만 남겨둡니다.
+> **📌 2026-04-23 업데이트**: 본 문서 후반부(Part 5 전후)의 Streamlit 앱은 현재 두 가지 공개 버전으로 제공됩니다:
+> - **`demo/streamlit_research_team_lite/`** — 16GB 노트북 대상 경량 버전 (`gemma4:e4b` 단일 모델 × 3 역할). **집에서 바로 재현 가능**.
+> - **`hands_on/claude_code_agents/`** — Claude Code 를 이미 쓰는 분용. 같은 프롬프트 9개를 `.claude/agents/` 네이티브 형식으로 이관.
+>
+> 따라서 **Part 1-4 (Claude Code + Ollama 기본 세팅) 또는 Streamlit Lite (Python + Ollama 만) 중 하나만 따라가도 동일한 3-agent 연구팀 파이프라인을 재현** 할 수 있습니다. Part 5 의 "풀 버전 Streamlit" 은 참고용으로만 남아있으나, 실제 재현은 Lite 변형 쪽을 권장합니다.
 
 **목적**: Track C 홈스터디를 **아무 외부 도움 없이** 혼자 끝까지 따라갈 수 있도록, 각 단계에서 **터미널에 실제로 보일 화면**과 **생성될 결과물**, **자주 막히는 지점**을 모두 수록한 문서.
 
 **읽는 법**: Track C 본문(`track_c_연구조수팀.md` Part B)과 **나란히** 놓고 보세요. 본문이 "무엇을 하라"면, 이 문서는 "어떻게 보일 것이고 무엇이 저장될 것인가".
 
-**환경 가정**: 가상의 석사생 "김연구" — MacBook Air M2 16GB 또는 삼성 갤럭시북 16GB. Node.js·Python 미설치 상태에서 시작.
+**환경 가정**: 가상의 석사생 "김연구" — MacBook Air M2 16GB 또는 삼성 갤럭시북 16GB (Windows 11). Node.js·Python 미설치 상태에서 시작. 본문 각 단계에서 **macOS Terminal / Windows PowerShell 두 경로를 병기**합니다.
 
 ---
 
