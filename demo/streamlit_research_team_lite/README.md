@@ -26,32 +26,41 @@
 
 ### 1. Ollama + 모델 준비
 
+**macOS**: https://ollama.com/download/mac (또는 `brew install ollama`)
+**Windows**: https://ollama.com/download/windows (설치 시 자동 백그라운드 실행)
+**Linux**: `curl -fsSL https://ollama.com/install.sh | sh`
+
+설치 후 공통:
 ```bash
-# Ollama 설치 (macOS 14+ 는 공식 .dmg, 아니면 curl install)
-# 상세: hands_on/SETUP.md
-
-# Lite 전용 모델 pull (~9.6GB, 5-15분)
-ollama pull gemma4:e4b
-# 주의: "E4B" 는 effective 4B (MatFormer 구조). 디스크/메모리 실사용은 ~9.6GB.
-#      16GB RAM 에서 다른 앱 닫고 돌리는 선.
-
-# 확인
-ollama list
-# → gemma4:e4b 가 목록에 있으면 OK
+ollama pull gemma4:e4b        # Lite 전용 모델 (~9.6GB, 5-15분)
+ollama list                   # gemma4:e4b 가 목록에 있으면 OK
 ```
 
-> **tag 주의**: `ollama pull gemma4` (태그 미지정) 는 환경에 따라 더 큰 변종(10GB+) 을 받을 수 있습니다. Lite 는 **정확히 `gemma4:e4b`** 를 권장.
+> **⚠️ tag 주의**: `ollama pull gemma4` (태그 미지정) 는 환경에 따라 더 큰 변종(10GB+) 을 받을 수 있습니다. Lite 는 **정확히 `gemma4:e4b`** 를 권장.
+>
+> **ℹ️ 메모리 주의**: "E4B" 는 effective 4B (MatFormer 구조). 디스크/메모리 실사용은 약 9.6GB. 16GB RAM 에서 다른 앱 닫고 돌리는 선입니다.
 
 ### 2. Python 환경
 
+**macOS / Linux**:
 ```bash
 cd demo/streamlit_research_team_lite
 python3 -m venv .venv
-source .venv/bin/activate          # Windows: .\.venv\Scripts\Activate.ps1
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. 실행
+**Windows (PowerShell)**:
+```powershell
+cd demo\streamlit_research_team_lite
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+> **Windows `.ps1` 권한 에러**: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` 1회 실행 후 재시도.
+
+### 3. 실행 (공통)
 
 ```bash
 streamlit run app.py
