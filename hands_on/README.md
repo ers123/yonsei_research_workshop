@@ -1,6 +1,7 @@
 # hands_on · 실습 자료
 
-연세대학교 생활과학대학 워크숍 (2026.04.24) 실습 자료 모음. 파일이 많아 보이지만 **본인 상황에 맞는 경로만 따라가면** 됩니다.
+- 연세대학교 생활과학대학 워크숍 (2026.04.24) 실습 자료 모음. 
+- 파일이 많아 보이지만 **본인 상황에 맞는 경로만 따라가면** 됩니다.
 
 ---
 
@@ -32,7 +33,7 @@
 
 | 폴더 | 용도 |
 |---|---|
-| [claude_code_agents/](claude_code_agents/) | 수연·준호·지은 역할을 Claude Code 네이티브 subagent 형식(`.claude/agents/`)으로 포팅한 10개 `.md` 파일. 이미 Claude Code 쓰시는 분은 Streamlit Lite 설치 없이 바로 사용 가능. **당일 실습 대상 아님** — 홈스터디용 |
+| [claude_code_agents/](claude_code_agents/) | 수연·준호·지은 역할을 Claude Code 네이티브 subagent 형식(`.claude/agents/`)으로 포팅한 10개 `.md` 파일. 이미 Claude Code 쓰시는 분은 Streamlit Lite 설치 없이 바로 사용 가능. **현장 실습 대상 아님** — 홈스터디용 |
 
 ---
 
@@ -53,7 +54,7 @@
 
 | 상황 | 가야 할 곳 |
 |---|---|
-| 내일 워크숍 참석 · 준비만 하고 싶음 | **실습_안내문.md** |
+| Workshop 참석 · 준비만 하고 싶음 | **실습_안내문.md** |
 | 환경 설치부터 차근차근 | **SETUP.md** |
 | Track A (맥락 문서) 만들어보고 싶음 | `prompts/track_a_맥락문서.md` |
 | Track B (대량 처리) 재현 | `prompts/track_b_대량처리.md` |
@@ -65,4 +66,4 @@
 
 ---
 
-*라이선스: CC BY-NC-SA 4.0 · 문의: yohan.harmony@gmail.com*
+
