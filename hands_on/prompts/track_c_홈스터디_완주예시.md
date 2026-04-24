@@ -13,72 +13,101 @@
 
 ---
 
-## Part 1 — Node.js & Claude Code 설치 완주
+## Part 1 — Claude Code 설치 완주
 
-### Step 1. Node.js 확인
+> **두 가지 설치 경로**: ① **curl 네이티브 설치** (권장, Node.js 별도 설치 불필요) ② **npm 설치** (이미 Node.js 가 있는 분). 둘 중 하나만 성공하면 됩니다. 처음 시작하는 분은 ①을 권장 — Node 런타임이 바이너리에 **번들**되어 함께 설치되므로 사용자가 Node.js 를 따로 관리할 필요가 없습니다 (Claude Code 자체는 내부적으로 Node.js 위에서 돕니다 — Electron 앱이 Chromium 을 품고 있는 것과 같은 구조).
 
-**입력** (macOS Terminal 또는 Windows PowerShell):
+---
+
+### 경로 ① — curl 네이티브 설치 (권장)
+
+Anthropic 이 제공하는 공식 네이티브 installer. 단일 바이너리를 `~/.local/bin` (macOS/Linux) 또는 `%LOCALAPPDATA%\Programs\claude` (Windows) 에 설치합니다.
+
+#### Step 1A-1. 설치 스크립트 실행
+
+**macOS / Linux** (Terminal):
 ```bash
-node --version
+curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-**가능한 결과 A — 이미 설치됨**:
+**진행 화면** (발췌):
 ```
-v20.11.0
-```
-→ v18 이상이면 다음 단계로. 끝.
+Installing Claude Code...
+Detected platform: darwin-arm64
+Downloading claude-code (latest)...
+  ######################################################### 100.0%
+Verifying checksum... OK
+Installing to /Users/your_name/.local/bin/claude
+Creating shim...
 
-**가능한 결과 B — 명령을 찾을 수 없음**:
-```
-zsh: command not found: node          # macOS
-```
-```
-node : 'node' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는
-프로그램 이름으로 인식되지 않습니다.     # Windows PowerShell
-```
-→ Node.js 미설치. 아래로 진행.
+✓ Claude Code installed successfully.
 
-### Step 1-2. Node.js 설치
-
-**macOS (Homebrew 사용)**:
-```bash
-brew install node
-```
-설치 진행 중 화면(발췌):
-```
-==> Downloading https://ghcr.io/v2/homebrew/core/node/manifests/20.11.0
-==> Fetching node
-==> Downloading https://ghcr.io/v2/homebrew/core/node/blobs/...
-==> Pouring node--20.11.0.sequoia.bottle.tar.gz
-🍺  /opt/homebrew/Cellar/node/20.11.0: 2,345 files, 78.3MB
-```
-3-5분 소요. 설치 완료 후:
-```bash
-node --version
-# v20.11.0
-npm --version
-# 10.2.4
+Next steps:
+  1. Restart your terminal (or run: source ~/.zshrc)
+  2. Run `claude` to start
 ```
 
-**Windows (winget 사용, PowerShell 관리자 권한)**:
+**Windows** (PowerShell, 관리자 권한 불필요):
 ```powershell
-winget install OpenJS.NodeJS.LTS
-```
-화면:
-```
-Found Node.js LTS [OpenJS.NodeJS.LTS] Version 20.11.0
-This application is licensed to you by its owner.
-Successfully verified installer hash
-Starting package install...
-Successfully installed
-```
-→ **PowerShell 창을 완전히 닫고 새로 열어야** `node` 명령이 인식됩니다. 재시작 후:
-```powershell
-node --version
-# v20.11.0
+irm https://claude.ai/install.ps1 | iex
 ```
 
-### Step 1-3. Claude Code 설치
+진행 화면:
+```
+Installing Claude Code for Windows...
+Downloading claude-code-windows-x64.zip ...
+Extracting to C:\Users\your_name\AppData\Local\Programs\claude
+Adding to user PATH...
+
+✓ Claude Code installed. Restart PowerShell and run `claude`.
+```
+
+#### Step 1A-2. PATH 확인 (중요)
+
+설치 스크립트가 `~/.local/bin` 또는 `%LOCALAPPDATA%\Programs\claude` 을 PATH 에 추가하지만, **현재 열려 있는 터미널 창에는 아직 반영되지 않습니다.** 반드시:
+
+- **터미널 창을 완전히 닫고 새로 열기** — 또는
+- **macOS/Linux**: `source ~/.zshrc` (zsh) / `source ~/.bashrc` (bash)
+- **Windows**: PowerShell 전체 재시작
+
+#### Step 1A-3. 설치 확인
+
+```bash
+claude --version
+```
+```
+1.0.33 (Claude Code)
+```
+
+> `command not found: claude` 로 뜨면 PATH 반영 실패. 터미널을 새 창에서 다시 열거나, 아래 수동 PATH 추가:
+> - macOS/zsh: `echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc`
+> - Linux/bash: `echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc`
+> - Windows PowerShell: `setx PATH "$env:PATH;$env:LOCALAPPDATA\Programs\claude"` 후 창 재시작
+
+#### Step 1A-4. 업데이트 / 삭제
+
+- 업데이트: 동일한 curl/irm 명령을 다시 실행 (덮어쓰기)
+- 또는: `claude update` (Claude Code 내장 자동 업데이트)
+- 삭제: `rm -rf ~/.local/bin/claude ~/.claude` (macOS/Linux) / `Remove-Item -Recurse $env:LOCALAPPDATA\Programs\claude, $env:USERPROFILE\.claude` (Windows)
+
+---
+
+### 경로 ② — npm 설치 (Node.js 가 이미 있는 분)
+
+이미 Node.js v18 이상을 쓰고 계신다면 이 방법이 빠릅니다.
+
+#### Step 1B-1. Node.js 확인
+
+```bash
+node --version
+```
+
+**결과 A — v18 이상**: 그대로 진행.
+**결과 B — 명령 없음 / v17 이하**: 경로 ① (curl) 로 가는 것이 간단합니다. 굳이 Node.js 부터 설치하려면:
+- **macOS**: `brew install node`
+- **Windows**: `winget install OpenJS.NodeJS.LTS` → **PowerShell 창 재시작**
+
+#### Step 1B-2. npm 으로 Claude Code 설치
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -89,16 +118,16 @@ npm install -g @anthropic-ai/claude-code
 npm warn deprecated inflight@1.0.6: This module is not supported...
 added 234 packages in 18s
 ```
-(경고 메시지는 무시해도 됩니다. 중요한 건 `added ... packages`)
+(경고는 무시 OK. `added ... packages` 가 핵심)
 
-**확인**:
+#### Step 1B-3. 확인
+
 ```bash
 claude --version
+# 1.0.33 (Claude Code)
 ```
-```
-1.0.33 (Claude Code)
-```
-숫자는 버전에 따라 다를 수 있음. 비슷한 형식이면 OK.
+
+---
 
 ### Step 1-4. 첫 실행 — OAuth 로그인
 
@@ -125,12 +154,16 @@ claude >
 
 이 `claude > ` 프롬프트가 나오면 **설치 완료**. `exit` 또는 `Ctrl+D`로 나옴.
 
-### 💥 이 단계에서 자주 막히는 곳
+### 💥 Part 1 자주 막히는 곳
 
 | 증상 | 원인 | 해결 |
 |---|---|---|
-| `npm: command not found` | Node.js 설치 시 npm 누락 또는 PATH 문제 | Windows: installer 재실행 + "Add to PATH" 체크. Mac: `brew reinstall node` |
-| 브라우저가 안 열림 | 기본 브라우저 설정 문제 | 터미널에 표시된 URL을 복사해서 직접 브라우저 주소창에 붙여넣기 |
+| `curl: command not found` (Windows) | PowerShell 은 `curl` 이 `Invoke-WebRequest` alias | 경로 ① 의 `irm ... \| iex` 쪽 명령 사용 |
+| `claude: command not found` (설치 직후) | PATH 에 `~/.local/bin` 미포함 또는 터미널 미재시작 | 터미널 새 창에서 재시도. 여전히 안 되면 Step 1A-3 하단의 수동 PATH 추가 |
+| curl 스크립트가 `Permission denied` | `~/.local/bin` 쓰기 권한 문제 (드물게 회사 Mac) | `sudo` 대신 `mkdir -p ~/.local/bin && chmod u+w ~/.local/bin` 후 재시도 |
+| `irm` 실행 시 "실행 정책 제한" (Windows) | PowerShell ExecutionPolicy 차단 | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` → Y → 재시도 |
+| `npm: command not found` | 경로 ② 선택했는데 Node.js 미설치 | 경로 ① (curl) 로 전환 권장. 혹은 `brew install node` / `winget install OpenJS.NodeJS.LTS` |
+| 브라우저가 안 열림 (OAuth 단계) | 기본 브라우저 설정 문제 | 터미널에 표시된 URL 을 복사해서 직접 브라우저 주소창에 붙여넣기 |
 | 로그인 후 터미널이 안 돌아옴 | localhost callback 차단 (특히 캠퍼스 wifi) | 모바일 핫스팟으로 연결 후 재시도 |
 | "Authentication failed" | 브라우저 창을 너무 빨리 닫음 | 다시 `claude` 실행 후 "authorized" 메시지까지 기다리기 |
 
@@ -241,7 +274,7 @@ ollama run gemma4 "안녕"
 | `Error: could not connect to ollama app` | 서버 미실행 | `ollama serve` (별도 터미널) 또는 Windows는 시스템 트레이의 라마 아이콘 확인 |
 | 다운로드가 중간에 멈춤 | 네트워크 끊김 | `ollama pull gemma4` 재실행 — 이어받기 됨 |
 | "no available memory" | RAM 부족 | 브라우저 탭 최대한 닫고 재시도. 8GB 머신에서 Gemma 4 borderline |
-| 첫 응답이 10분 넘게 안 옴 | CPU 추론 (GPU 가속 없음) | 정상. 기다리거나 더 작은 모델로 교체 (`ollama pull qwen2.5:3b`) |
+| 첫 응답이 10분 넘게 안 옴 | CPU 추론 (GPU 가속 없음) | 정상. 기다리거나, 데모 이후 복원될 저사양 rung(qwen3:1.7b 등) 으로 교체. |
 | 한국어 응답이 깨짐 | 1B급 모델 사용 중 | `gemma4` (4B, E4B)는 한국어 OK. 더 작은 모델은 불안정 |
 
 ---
@@ -570,7 +603,7 @@ python --version     # Windows
 ### Step 5-2. 리포로 이동
 
 ```bash
-cd ~/Downloads/yonsei_research_workshop/demo/streamlit_research_team/
+cd ~/Downloads/yonsei_research_workshop/demo/streamlit_research_team_lite/
 # 또는 본인이 clone/다운로드한 위치
 pwd
 # .../demo/streamlit_research_team
@@ -724,7 +757,7 @@ streamlit run app.py
 
 ### A. Streamlit 앱의 시스템 프롬프트 바꾸기
 
-`demo/streamlit_research_team/agents.py` 파일을 열면 3개 에이전트(수연/준호/지은)의 시스템 프롬프트가 있습니다. 본인 분야·자주 쓰는 표현·학과 표준에 맞게 문구만 수정하면 **같은 파이프라인이 다른 도메인 연구팀으로 변환**됩니다.
+`demo/streamlit_research_team_lite/agents.py` 파일을 열면 3개 에이전트(수연/준호/지은)의 시스템 프롬프트가 있습니다. 본인 분야·자주 쓰는 표현·학과 표준에 맞게 문구만 수정하면 **같은 파이프라인이 다른 도메인 연구팀으로 변환**됩니다.
 
 예: 노인학 전공이라면 "수연"의 프롬프트에 "65세 이상 노인 표본 연구 설계를 우선 고려"를 추가.
 
