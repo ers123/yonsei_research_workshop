@@ -6,6 +6,14 @@
 - Codex thread / AI office video: https://youtube.com/watch?v=paklphOK9uM
 - Codex thread / AI office README: https://github.com/citizendev9c/yt-assets/blob/main/ai-productivity/codex-thread-chat-26-06-06/README.md
 - Training-first long thesis video: https://www.youtube.com/watch?v=OXVjJA8geWI
+- `revfactory/harness` repository: https://github.com/revfactory/harness
+- Harness quickstart: https://github.com/revfactory/harness/blob/main/docs/quickstart.md
+- Harness experimental dependency note: https://github.com/revfactory/harness/blob/main/docs/experimental-dependency.md
+- Harness skill definition and references: https://github.com/revfactory/harness/tree/main/skills/harness
+- Claude Code subagents documentation: https://code.claude.com/docs/en/sub-agents
+- Antigravity Projects documentation: https://www.antigravity.google/docs/projects
+- Antigravity Rules and Workflows documentation: https://antigravity.google/docs/rules-workflows
+- Antigravity Subagents documentation: https://antigravity.google/docs/subagents
 - Existing April 2026 workshop repository materials in this repository
 
 ## Copyright Boundary

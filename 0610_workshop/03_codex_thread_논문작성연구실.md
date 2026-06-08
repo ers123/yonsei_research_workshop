@@ -52,6 +52,30 @@ Phase 5: Supervisor merge and package
 Phase 6: Human signoff
 ```
 
+## Codex에서 worker thread를 실제로 여는 방식
+
+Codex multi-thread 운영은 자동 병합 기능이 아니라, 별도 thread들을 만들고 supervisor가 결과를 읽어 병합하는 방식입니다.
+
+수동 운영:
+
+1. Supervisor thread를 먼저 만들고 phase plan을 확정합니다.
+2. 같은 프로젝트 안에 Evidence-Literature, Data-Methods, Visual-Assets, Review-Verification, Drafting worker thread를 만듭니다.
+3. `threads/thread-map.md`에 thread 제목, 역할, 반환 파일, 현재 상태를 기록합니다.
+4. 각 worker에게 `Worker Common Contract`와 역할별 prompt를 보냅니다.
+5. worker는 본문 파일을 직접 병합하지 않고 지정된 return file만 작성합니다.
+6. Supervisor가 return file을 읽고 merge report와 human signoff checklist를 작성합니다.
+
+Codex 앱 도구 기반 운영:
+
+```text
+create_thread -> worker thread 생성
+send_message_to_thread -> 역할 prompt와 후속 지시 전달
+read_thread -> worker 상태와 요약 확인
+Supervisor merge -> 반환 파일을 읽고 하나의 검토 패키지로 병합
+```
+
+병렬로 파일을 수정해야 하면 별도 worktree를 쓰는 편이 안전합니다. 단순 분석이나 return file 작성만 시키는 경우에는 같은 프로젝트에서 운영해도 됩니다.
+
 ## thread를 더 만들기 전 질문
 
 새 thread는 새 전문성이 있을 때만 만듭니다.

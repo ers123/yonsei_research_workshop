@@ -11,6 +11,7 @@
 5. Supervisor merge prompt
 6. AI-use log prompt
 7. Long thesis paragraph prompt
+8. Cross-runtime harness prompts, if using Claude Code, Antigravity, or multiple Codex threads
 
 ## 1. Supervisor Startup Prompt
 
@@ -279,4 +280,101 @@ Paragraph unit:
 7. 외부 배포 전 human-only decision
 
 각 항목에 대해 왜 금지인지, 무엇이 확인되면 허용 가능한지 적어라.
+```
+
+## 14. Claude Code Harness Generation Prompt
+
+```text
+하네스를 구성해줘.
+
+도메인:
+연세대학교 대학원 연구실의 AI-assisted research writing lab.
+
+목표:
+- 대학원생이 논문 작성 과정에서 AI를 연구보조원처럼 쓰게 한다.
+- AI가 최종 저자나 최종 판단자가 되지 않도록 한다.
+- 자료 정리, 문헌 위치 잡기, 데이터/방법 검토, 시각화 계획, 검증, 초안 작성, 인간 승인 과정을 역할별로 분리한다.
+
+원하는 팀 구조:
+1. Supervisor-Orchestrator
+2. Evidence-Literature Specialist
+3. Data-Methods Specialist
+4. Visual-Assets Specialist
+5. Review-Verification Specialist
+6. Drafting Specialist
+
+운영 패턴:
+- Fan-out/Fan-in: 문헌, 데이터/방법, 시각화 worker를 병렬로 실행한다.
+- Producer-Reviewer: Drafting 결과는 Review-Verification을 통과해야 한다.
+- Supervisor: 최종 병합과 human-only gate는 Supervisor가 관리한다.
+
+공통 규칙:
+- 각 worker는 자기 반환 파일 하나만 책임진다.
+- Review-Verification이 blocked 처리한 claim은 초안에 넣지 않는다.
+- raw data, raw quote, 실명, private link, participant-level detail은 공개/수업용 산출물에 넣지 않는다.
+- quote, statistics, ethics, external circulation은 human-only gate로 남긴다.
+
+생성할 산출물:
+- `.claude/agents/` 아래 역할별 agent definition
+- `.claude/skills/` 아래 research-writing orchestration skill
+- `CLAUDE.md`에는 긴 지침을 반복하지 말고, skill trigger와 파일 계약 포인터만 남긴다.
+- `_workspace/` 또는 `threads/` 아래 반환 파일 convention을 문서화한다.
+```
+
+## 15. Antigravity Workflow Adaptation Prompt
+
+```text
+Antigravity 프로젝트에서 사용할 research-writing-lab workflow와 project rule을 설계해라.
+
+목표:
+Codex thread 연구실 또는 Claude Code Harness의 supervisor-worker 구조를 Antigravity의 Project, Rules, Workflows, Subagents, Worktree 방식으로 옮긴다.
+
+역할:
+1. Supervisor
+2. Evidence-Literature
+3. Data-Methods
+4. Visual-Assets
+5. Review-Verification
+6. Drafting
+
+작성할 것:
+1. `.agents/rules/research-writing-lab.md`에 넣을 project rule 초안
+2. `/research-writing-lab` workflow로 호출할 단계별 workflow prompt
+3. 각 subagent가 작성해야 할 반환 파일 목록
+4. 같은 본문 파일을 여러 subagent가 동시에 수정하지 않도록 하는 규칙
+5. permission caution: private folder, external URL, terminal command, raw data 접근 제한
+
+금지:
+- Harness의 `.claude` 파일이 Antigravity에서 그대로 실행된다고 말하지 마라.
+- publication-ready claim을 만들지 마라.
+- source가 없는 문헌, 수치, 인용문을 만들지 마라.
+```
+
+## 16. Codex Worker Thread Invocation Prompt
+
+```text
+너는 Codex Supervisor thread다.
+
+목표:
+아래 worker thread들을 별도로 만들고, 각 worker가 지정된 반환 파일 하나만 작성하도록 운영한다.
+
+Worker:
+1. Evidence-Literature -> `threads/evidence-literature/return.md`
+2. Data-Methods -> `threads/data-methods/return.md`
+3. Visual-Assets -> `figures/visual-manifest.md`
+4. Review-Verification -> `threads/review-verification/return.md`
+5. Drafting -> `threads/drafting/return.md`
+
+운영 방식:
+- 먼저 `threads/thread-map.md`에 worker 역할, thread 제목 또는 ID, 반환 파일, 상태를 기록한다.
+- 각 worker에게 Worker Common Contract와 역할별 prompt를 전달한다.
+- worker는 본문 파일을 직접 병합하지 않는다.
+- supervisor는 worker 반환 파일을 읽고 `threads/supervisor/merge-report.md`를 작성한다.
+- 병렬 파일 수정이 필요하면 별도 worktree 사용을 제안한다.
+
+마지막 산출물:
+1. thread map
+2. worker return status
+3. source-gated merge report
+4. human-only decision checklist
 ```

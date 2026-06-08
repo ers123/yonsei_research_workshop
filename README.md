@@ -37,11 +37,12 @@
 │
 ├── 0610_workshop/                    — 6월 10일 대학원 연구실 보충 자료
 │   ├── README.md                     — 전체 TOC + 90분 운영 흐름
-│   ├── 01_전체_운영지도.md             — 네 가지 접근법 선택 지도
+│   ├── 01_전체_운영지도.md             — 다섯 가지 접근법 선택 지도
 │   ├── 02_vellum_lite_구조화_초안패키지.md
 │   ├── 03_codex_thread_논문작성연구실.md
 │   ├── 04_장문논문_workflow.md
 │   ├── 05_local_hybrid_model_운용.md
+│   ├── 06_claude_antigravity_harness.md — Claude Code/Antigravity 확장
 │   ├── prompts/                      — copy-ready adapted prompt pack
 │   ├── templates/                    — AGENTS, AI-use log, do-not-claim 템플릿
 │   └── case_study/                   — Codex thread 연구실 공개용 case study
