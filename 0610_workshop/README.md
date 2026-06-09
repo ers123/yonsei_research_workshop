@@ -1,69 +1,79 @@
-# 0610 Workshop: AI-Assisted Research Writing Guide
+# 0610 DSB Workshop: AI로 논문 초안 패키지 만들기
 
-연세대학교 대학원 연구실 워크숍용 보충 자료입니다.
+이 폴더는 2026년 6월 10일 연세대학교 DSB 연구실 워크숍용 정리본입니다.
 
-이 폴더의 목적은 슬라이드를 대체하는 것입니다. 발표자가 한 번에 설명할 수 있는 큰 그림, 학생이 워크숍 이후 혼자 따라 할 수 있는 절차, 바로 복사해서 쓸 수 있는 프롬프트와 템플릿을 함께 둡니다.
+핵심 메시지는 단순합니다.
 
-## 한 줄 메시지
+> AI에게 "논문 써줘"라고 맡기지 말고, 연구자가 director가 되어 자료, 주장, 근거, 위험, 초안, 비평, 개정, AI 사용 기록을 관리한다.
 
-좋은 AI 논문 작성은 "논문 써줘"가 아니라, 연구자가 director가 되어 자료, 근거, 초안, 검증, 비평, 개정, 인간 승인을 역할별로 운영하는 일입니다.
+## 먼저 열어볼 것
 
-## 이 자료가 다루는 다섯 가지 접근
+1. [01_학생용_핵심가이드.md](01_학생용_핵심가이드.md)
+2. [02_DSB_논문초안_데모/README.md](02_DSB_논문초안_데모/README.md)
+3. [02_DSB_논문초안_데모/final_draft_examples/manuscript-draft-ko-v0.2.md](02_DSB_논문초안_데모/final_draft_examples/manuscript-draft-ko-v0.2.md)
+4. [02_DSB_논문초안_데모/evidence_package/evidence-bindings.md](02_DSB_논문초안_데모/evidence_package/evidence-bindings.md)
+5. [02_DSB_논문초안_데모/risk_and_review/peer-review-risk-memo-v0.2.md](02_DSB_논문초안_데모/risk_and_review/peer-review-risk-memo-v0.2.md)
 
-| 접근 | 언제 쓰나 | 핵심 산출물 |
-|---|---|---|
-| Structured first-draft package | 자료가 있고 검토 가능한 초안 패키지가 필요할 때 | brief, evidence binding, risk report, draft package |
-| Codex thread 연구실 | 여러 연구보조 역할을 나누어 병렬/순차 운영하고 싶을 때 | supervisor report, worker returns, source gate, revised draft |
-| 장문 논문 workflow | 학위논문처럼 긴 글을 문헌 흐름 기반으로 확장해야 할 때 | literature-flow reports, outline, paragraph-unit draft |
-| Local/hybrid model 운용 | 민감자료, 업로드 제한, 비용, 모델 정책 이슈가 있을 때 | local triage, sanitized cloud draft, human-only gates |
-| Claude Code / Antigravity harness | Codex가 아닌 agentic coding 도구에서도 같은 연구실 구조를 쓰고 싶을 때 | role agents, project rules, workflows, return-file contract |
+## 이 폴더의 구성
 
-다섯 접근은 경쟁 관계가 아닙니다. 같은 연구 프로젝트 안에서도 함께 쓸 수 있습니다.
+| 폴더 | 용도 |
+|---|---|
+| `01_학생용_핵심가이드.md` | 학생 입장에서 따라 하는 기본 workflow |
+| `02_DSB_논문초안_데모/` | DSB 자료를 바탕으로 만든 논문 초안 예시와 검토 패키지 |
+| `03_prompts_appendix/` | 바로 복사할 수 있는 상세 프롬프트 모음 |
+| `04_Codex_multi_thread_고급예시/` | Codex multi-thread, Claude Code subagents, Antigravity workflow 확장 |
+| `05_장문논문_workflow/` | 긴 학위논문을 목차와 문단 단위로 확장하는 방법 |
+| `reference_notes/` | 원자료 사용 경계와 공개 범위 설명 |
+| `presentation.html` | Claude Code subagents 참고용 기존 HTML 자료 |
 
-## 추천 읽기 순서
+## 1시간 워크숍에서의 추천 흐름
 
-1. [01_전체_운영지도.md](01_전체_운영지도.md)
-2. [02_vellum_lite_구조화_초안패키지.md](02_vellum_lite_구조화_초안패키지.md)
-3. [03_codex_thread_논문작성연구실.md](03_codex_thread_논문작성연구실.md)
-4. [04_장문논문_workflow.md](04_장문논문_workflow.md)
-5. [05_local_hybrid_model_운용.md](05_local_hybrid_model_운용.md)
-6. [06_claude_antigravity_harness.md](06_claude_antigravity_harness.md)
-7. [prompts/README.md](prompts/README.md)
-8. [templates/README.md](templates/README.md)
-9. [live_demo_guide.md](live_demo_guide.md)
+1. 학생용 핵심가이드에서 "AI에게 바로 쓰게 하지 않는다"는 원칙을 설명한다.
+2. DSB 최종 초안 예시를 먼저 보여준다.
+3. 그 초안이 어떤 evidence package와 risk memo에서 나왔는지 보여준다.
+4. 기본 경로는 유료 LLM 하나로도 가능하다고 설명한다.
+5. Codex multi-thread는 고급 예시로 짧게 보여준다.
+6. 장문논문 workflow는 학위논문처럼 분량이 길어야 할 때의 별도 전략으로 소개한다.
+7. prompts appendix는 수업 후 참고자료로 안내한다.
 
-## 90분 운영 흐름
+## 무엇을 소개하지 않는가
 
-| 시간 | 설명할 내용 | 열어볼 파일 |
-|---|---|---|
-| 0-10분 | AI 시대 논문 심사는 결과물보다 과정, 근거, AI 사용 기록을 더 묻는다 | `01_전체_운영지도.md` |
-| 10-25분 | 학생 상황별 다섯 가지 접근법 선택 | `01_전체_운영지도.md` |
-| 25-40분 | Structured package: 자료를 초안 패키지로 바꾸는 파일 계약 | `02_vellum_lite_구조화_초안패키지.md` |
-| 40-60분 | Codex thread 연구실: supervisor + 5 worker model | `03_codex_thread_논문작성연구실.md`, `case_study/` |
-| 60-75분 | 장문 논문: 학습 먼저, 답변은 나중, 문단 단위 작성 | `04_장문논문_workflow.md` |
-| 75-85분 | Local/hybrid 모델: 무엇을 로컬에 두고 무엇을 cloud로 보낼지 | `05_local_hybrid_model_운용.md` |
-| 85-90분 | Claude Code/Antigravity 확장과 prompt/template 안내 | `06_claude_antigravity_harness.md`, `prompts/`, `templates/` |
+`vellum-lite`, `hermes`, `paperclip`은 이 워크숍의 주제가 아닙니다. 이들은 내부적으로 파일 계약과 자동화 가능성을 실험한 흔적이지만, 학생들에게 필요한 것은 설치형 엔진이 아니라 다음의 재현 가능한 작업 방식입니다.
 
-## 학생에게 줄 실행 과제
+```text
+자료 정리
+  -> task shape
+  -> evidence binding
+  -> do-not-claim
+  -> first draft
+  -> critique
+  -> rewrite
+  -> AI-use log
+  -> human signoff
+```
 
-워크숍 후 7일 안에 다음 파일만 만들어도 충분합니다.
+## 원자료와 공개 경계
 
-1. `task-brief.md`
-2. `do-not-claim.md`
-3. `materials-inventory.md`
-4. `evidence-bindings.md`
-5. `ai-use-log.md`
-6. `outline.md`
-7. `one-section-draft.md`
-8. `review-report.md`
+DSB 논문 초안은 교수님이 공유한 연구자료를 참고해 만든 데모입니다. 다만 이 폴더에는 원자료 자체를 포함하지 않습니다.
 
-완성 논문이 아니라, 지도교수와 동료가 바로 비평할 수 있는 검토 패키지가 목표입니다.
+포함하지 않는 것:
 
-## 공개 자료 경계
+- raw interview
+- participant-level data
+- 실명 또는 식별 가능한 파일명
+- raw CSV row
+- private link
+- quote approval 전 원문
 
-이 폴더는 공개 저장소에 둘 수 있는 자료만 포함합니다.
+포함하는 것:
 
-- 원자료, 인터뷰 원문, 참여자 단위 자료, private link는 넣지 않습니다.
-- 프롬프트는 워크숍용으로 재작성한 adapted prompt입니다.
-- 외부 영상이나 README의 긴 원문 프롬프트/자막을 그대로 복제하지 않습니다.
-- 로컬 모델은 정책 우회만을 목적으로 쓰는 것이 아니라, privacy와 비용, 검증 가능성을 위한 선택지로 설명합니다.
+- 익명화/요약된 초안 패키지
+- evidence binding
+- risk memo
+- review report
+- visual planning
+- 학생용 prompt와 workflow
+
+따라서 이 폴더는 "원자료에서 새롭게 분석을 실행한 live analysis demo"가 아니라, 교수님이 공유한 자료를 바탕으로 정리한 sanitized draft package를 어떻게 검토하고 확장할 수 있는지 보여주는 자료입니다.
+
+Word 예시는 APA-like / APA 7-style 시연용입니다. 실제 투고용 APA final manuscript로 설명하면 안 됩니다. 참고문헌, conference paper metadata, internal technical disclosure, 특허/앱 관련 서술은 외부 배포 전 human verification이 필요합니다.
