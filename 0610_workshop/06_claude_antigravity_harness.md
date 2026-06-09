@@ -218,7 +218,7 @@ Supervisor
 - 여러 worker가 같은 파일을 수정하면 충돌 위험이 큽니다.
 - read-only 분석은 같은 local 프로젝트에서 해도 되지만, 파일 수정이 병렬로 일어나면 worktree를 쓰는 편이 안전합니다.
 
-## 워크샵에서 보여줄 메시지
+## 키 메시지
 
 ```text
 Codex, Claude Code, Antigravity 중 어떤 도구를 쓰느냐보다 중요한 것은 역할 분리, 반환 파일, 검증 gate, human-only decision을 남기는 것입니다. 도구는 달라도 연구자가 director라는 구조는 같습니다.
