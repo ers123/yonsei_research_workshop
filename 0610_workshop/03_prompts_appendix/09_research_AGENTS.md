@@ -2,6 +2,8 @@
 
 Codex, Claude Code, Antigravity 같은 project operator를 반복적으로 쓸 때 프로젝트 루트에 둘 수 있는 연구용 지침 예시입니다.
 
+영상에서 말한 "팀장 방 + 담당자 방" 운영을 논문 작성용으로 바꾼 버전입니다. 핵심은 AI가 논문을 한 번에 쓰는 것이 아니라, supervisor가 작은 worker room을 운영하고 phase gate마다 멈춰서 사람에게 확인을 받는 것입니다.
+
 아래 내용을 그대로 `AGENTS.md` 또는 도구별 memory file로 옮긴 뒤, 연구실 상황에 맞게 수정하세요.
 
 ```md
@@ -23,6 +25,21 @@ The goal is not to produce a publication-ready paper automatically. The goal is 
 - rewrite plan
 - AI-use log
 - human signoff checklist
+
+## Team-Lead Principle
+
+The supervisor room is the team lead.
+
+The supervisor must not directly perform all research, drafting, and verification in one long context. Its job is to:
+
+- define worker rooms
+- write task cards
+- wait for completion reports
+- merge reports
+- identify conflicts
+- ask the human before crossing phase gates
+
+If the tool cannot automatically create new threads or rooms, the supervisor should create copy-ready task cards for the human to paste into separate rooms.
 
 ## Source Boundary
 
@@ -57,27 +74,56 @@ The following require explicit human approval:
 
 ## Workflow
 
-1. Inspect materials before writing.
-2. Create or update `task-brief.md`.
-3. Create or update `materials-inventory.md`.
-4. Create or update `do-not-claim.md`.
-5. Create or update `evidence-bindings.md`.
-6. Draft only from allowed evidence.
-7. Run critique before rewrite.
-8. Log AI use.
-9. Stop at human signoff when required.
+Phase 0. Intake plan only
+
+- Inspect the folder and materials.
+- Propose worker rooms and task cards.
+- Do not start drafting.
+- Ask the human whether to proceed.
+
+Phase 1. Parallel materials review
+
+- `materials-mapper` and `literature-mapper` may run in parallel.
+- They should not wait for each other if their inputs are independent.
+
+Phase 2. Evidence gate
+
+- Start `evidence-binder` only after Phase 1 completion reports are available.
+- Produce `evidence-bindings.md` and `do-not-claim.md`.
+
+Phase 3. Outline gate
+
+- Start outline work only from evidence-approved claims.
+- Produce `argument-outline.md` and `section-architecture.md`.
+- Ask the human to approve the outline before drafting.
+
+Phase 4. Drafting
+
+- Draft only from allowed or allowed-with-caveat claims.
+- Do not use blocked, needs-verification, or human-only claims as manuscript claims.
+
+Phase 5. Critique and rewrite plan
+
+- Run a separate critic/verifier pass.
+- Do not let the drafter be the only reviewer.
+
+Phase 6. AI-use log and human signoff
+
+- Record AI use.
+- Stop at human-only gates before external circulation or submission.
 
 ## Multi-Agent Rules
 
-Use a small team:
+Use a small team. Default worker rooms:
 
-- materials mapper
-- literature mapper
-- evidence binder
-- outline architect
-- critic / verifier
+- `materials-mapper`: inventory, source boundary, missing inputs
+- `literature-mapper`: benchmark papers, theory, gap, citation needs
+- `evidence-binder`: claim-source table, do-not-claim list
+- `outline-drafter`: outline first; draft only after outline approval
+- `critic-verifier`: source, privacy, overclaim, citation, methods risk
+- optional `visual-planner`: figure/table plan and visual safety labels
 
-Do not spawn unnecessary agents. Prefer 4-5 workers.
+Do not spawn unnecessary agents. Prefer 4-5 workers; add `visual-planner` only when figures or tables matter.
 
 The supervisor should:
 
@@ -85,7 +131,10 @@ The supervisor should:
 - wait for completion reports
 - merge results
 - identify conflicts
+- summarize each completed phase
+- ask "Proceed to the next phase?" before moving on
 - ask the human before crossing a human-only gate
+- avoid polling worker rooms for progress
 
 Workers should return:
 
@@ -94,6 +143,55 @@ Workers should return:
 - uncertainties
 - blocked claims
 - recommended next gate
+
+## Stop And Reporting Rules
+
+- A worker reports only when its assigned task is complete.
+- No mid-task status updates unless blocked, uncertain, or needing human confirmation.
+- The supervisor must not repeatedly ask workers "Are you done?"
+- The supervisor merges reports only after the relevant phase is complete.
+- After every phase, the supervisor must stop and ask the human whether to proceed.
+
+Worker return format:
+
+```md
+## Key 3 Lines
+1.
+2.
+3.
+
+## Completed Output
+
+## Evidence Used
+
+## Blocked / Risky Claims
+
+## Needs Human Decision
+
+## Recommended Next Gate
+go / revise / stop
+```
+
+Supervisor phase report format:
+
+```md
+## Phase Status
+go / revise / stop
+
+## Completed Rooms
+| Room | Output | Gate result |
+|---|---|---|
+
+## Merged Findings
+
+## Conflicts Or Unverified Items
+
+## Human Decision Needed
+
+## Next Phase Proposal
+
+Proceed to the next phase?
+```
 
 ## Writing Rules
 
@@ -117,6 +215,21 @@ Prefer:
 ## File Discipline
 
 Keep outputs small and inspectable.
+
+Recommended files:
+
+- `thread-map.md`
+- `task-brief.md`
+- `materials-inventory.md`
+- `do-not-claim.md`
+- `evidence-bindings.md`
+- `argument-outline.md`
+- `section-architecture.md`
+- `first-draft.md`
+- `review-report.md`
+- `rewrite-plan.md`
+- `ai-use-log.md`
+- `human-signoff-checklist.md`
 
 When editing existing files:
 

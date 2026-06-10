@@ -10,6 +10,18 @@
 - 문헌 검토, evidence binding, outline, draft, critique를 분리하고 싶다.
 - Codex multi-thread, Claude Code subagents/team, Antigravity workflow처럼 여러 작업 단위를 병렬 또는 순차로 맡길 수 있는 도구를 쓴다.
 
+## 학생용 읽는 순서
+
+이 폴더만 처음 보면 다소 추상적으로 보일 수 있습니다. 다음 순서로 보면 이해하기 쉽습니다.
+
+1. 이 README에서 전체 구조를 본다.
+2. `thread_model.md`에서 supervisor + worker 구조를 본다.
+3. `codex_supervisor_prompt.md`를 복사해 team-lead room을 시작하는 법을 본다.
+4. `../03_prompts_appendix/09_research_AGENTS.md`를 실제 프로젝트 루트의 `AGENTS.md`로 옮겨 반복 운영 규칙을 저장한다.
+5. `thread-map.md`와 `supervisor-merge-report.md`는 이미 실행된 예시로만 참고한다.
+
+핵심은 04번 폴더의 모든 파일을 외우는 것이 아니라, `AGENTS.md`에 팀장 방/담당자 방/phase gate/완료 보고 규칙을 저장해 두는 것입니다.
+
 ## 핵심 모델
 
 ```text
@@ -24,6 +36,8 @@ Supervisor thread
 ```
 
 worker를 10개 이상 계속 늘리는 방식이 아닙니다. 연구실 워크숍에서는 4-5개 worker가 가장 설명하기 쉽고, 결과도 합치기 쉽습니다.
+
+영상의 표현으로 바꾸면, supervisor thread는 "팀장 방"이고 worker thread는 "담당자 방"입니다. 팀장 방은 직접 논문을 쓰지 않고, 담당자 방의 완료 보고를 취합한 뒤 phase마다 멈춰서 사람에게 다음 진행 여부를 묻습니다.
 
 ## 파일 설명
 
